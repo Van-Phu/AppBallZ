@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (id){
                     case R.id.page_1:
 
-                        loadFragment(new StandingsFragment());
+                        loadFragment(new MainFrag());
                         return true;
 
                     case R.id.page_2:
