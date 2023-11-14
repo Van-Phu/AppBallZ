@@ -1,14 +1,19 @@
 package com.example.ballz;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -46,6 +51,8 @@ public class StandingsFragment extends Fragment {
     ListView lvTableStangdings;
     customTableStandings adapterTableStandings;
     RequestQueue requestQueue;
+    TextView tvSeeAllStandingTable;
+    FrameLayout fragMain;
 
     String urlClubStanding = "https://supersport.com/apix/football/v5/tours/c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6/table-logs";
 
@@ -83,6 +90,7 @@ public class StandingsFragment extends Fragment {
     }
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -144,12 +152,18 @@ public class StandingsFragment extends Fragment {
                         }
                     }
 
-                    if (adapterTableStandings == null) {
-                        adapterTableStandings = new customTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
-                        lvTableStangdings.setAdapter(adapterTableStandings);
+                    if (getActivity() != null) {
+                        if (adapterTableStandings == null) {
+                            adapterTableStandings = new customTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
+                            lvTableStangdings.setAdapter(adapterTableStandings);
+                        } else {
+                            adapterTableStandings.notifyDataSetChanged();
+                        }
                     } else {
-                        adapterTableStandings.notifyDataSetChanged();
+                        Log.e("StandingsFragment", "Activity is null");
                     }
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -162,7 +176,28 @@ public class StandingsFragment extends Fragment {
             }
         });
         requestQueue.add(request);
+
+
+
+        //click hiện Bảng full
+        tvSeeAllStandingTable = (TextView) view.findViewById(R.id.tvSeeAllStandingTable);
+        tvSeeAllStandingTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new TableStandingFullFragment());
+            }
+        });
+
+
         return view;
     }
+    public void loadFragment(Fragment fragment){
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragStangding, fragment);
+        fragmentTransaction.commit();
+    }
+
+
 
 }
