@@ -45,8 +45,7 @@ public class customTableStandings extends ArrayAdapter {
         TextView tvLoseNum = (TextView) convertView.findViewById(R.id.tvLoseNum);
         TextView tvPoint = (TextView) convertView.findViewById(R.id.tvPoint);
 
-
-        Picasso.with(context).load(clubStanding.getImg()).resize(100,100).into(imgClub);
+        checkIcon(clubStanding.getNameClub(),imgClub);
         tvNameClub.setText(clubStanding.getNameClub());
         tvWinNum.setText(clubStanding.getWinNumb());
         tvDrawNum.setText(clubStanding.getDrawNumb());
@@ -55,5 +54,71 @@ public class customTableStandings extends ArrayAdapter {
 
         return convertView;
 
+    }
+    private void checkIcon(String icon, ImageView view) {
+        switch (icon) {
+            case "Manchester City":
+                view.setImageResource(R.drawable.manchester_city);
+                break;
+            case "Liverpool":
+                view.setImageResource(R.drawable.liverpool);
+                break;
+            case "Arsenal":
+                view.setImageResource(R.drawable.arsenal);
+                break;
+            case "Tottenham Hotspur":
+                view.setImageResource(R.drawable.tottenham);
+                break;
+            case "Aston Villa":
+                view.setImageResource(R.drawable.astonvilla);
+                break;
+            case "Manchester United":
+                view.setImageResource(R.drawable.manchester_utd);
+                break;
+            case "Newcastle":
+                view.setImageResource(R.drawable.newcastle);
+                break;
+            case "Brighton":
+                view.setImageResource(R.drawable.brighton);
+                break;
+            case "West Ham":
+                view.setImageResource(R.drawable.west_ham);
+                break;
+            case "Chelsea":
+                view.setImageResource(R.drawable.chelsea);
+                break;
+            case "Brentford":
+                view.setImageResource(R.drawable.brentford);
+                break;
+            case "Wolverhampton Wanderers":
+                view.setImageResource(R.drawable.wolves);
+                break;
+            case "Crystal Palace":
+                view.setImageResource(R.drawable.crystal_palace);
+                break;
+            case "Everton":
+                view.setImageResource(R.drawable.everton);
+                break;
+            case "Forest":
+                view.setImageResource(R.drawable.nottingham);
+                break;
+            case "Fulham":
+                view.setImageResource(R.drawable.fulham);
+                break;
+            case "Bournemouth":
+                view.setImageResource(R.drawable.bournemouth);
+                break;
+            case "Luton Town":
+                view.setImageResource(R.drawable.luton);
+                break;
+            case "Sheffield United":
+                view.setImageResource(R.drawable.sheffield_utd);
+                break;
+            case "Burnley":
+                view.setImageResource(R.drawable.burnley);
+                break;
+            default:
+                break;
+        }
     }
 }
