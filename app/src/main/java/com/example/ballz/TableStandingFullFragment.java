@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,12 +140,18 @@ public class TableStandingFullFragment extends Fragment {
                         }
                     }
 
-                    if (adapterTableStandings == null) {
-                        adapterTableStandings = new customTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
-                        lvTableStangdings.setAdapter(adapterTableStandings);
+                    if (getActivity() != null) {
+                        if (adapterTableStandings == null) {
+                            adapterTableStandings = new customTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
+                            lvTableStangdings.setAdapter(adapterTableStandings);
+                        } else {
+                            adapterTableStandings.notifyDataSetChanged();
+                        }
                     } else {
-                        adapterTableStandings.notifyDataSetChanged();
+                        Log.e("StandingsFragment", "Activity is null");
                     }
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
