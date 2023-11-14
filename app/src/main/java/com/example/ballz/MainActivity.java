@@ -25,10 +25,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addControls();
-        events();
-//        loadFragment(new MainFrag());
 
 
+
+        addEvents();
+        loadFragment(new MainFrag());
+
+
+
+
+    }
+
+    private void addEvents() {
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -47,15 +55,12 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new StandingsFragment());
                         return true;
                     case R.id.page_4:
-
+                        loadFragment(new TableStandingFullFragment());
                         return true;
                 }
                 return true;
             }
         });
-    }
-
-    private void events() {
 
     }
 

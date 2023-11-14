@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +22,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StandingsFragment#newInstance} factory method to
+ * Use the {@link TableStandingFullFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StandingsFragment extends Fragment {
+public class TableStandingFullFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,8 +38,8 @@ public class StandingsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ArrayList<ClubStanding> clubStandingArrayList = new ArrayList<>();
 
+    private ArrayList<ClubStanding> clubStandingArrayList = new ArrayList<>();
 
     ListView lvTableStangdings;
     customTableStandings adapterTableStandings;
@@ -49,7 +47,7 @@ public class StandingsFragment extends Fragment {
 
     String urlClubStanding = "https://supersport.com/apix/football/v5/tours/c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6/table-logs";
 
-    public StandingsFragment() {
+    public TableStandingFullFragment() {
         // Required empty public constructor
     }
 
@@ -59,11 +57,11 @@ public class StandingsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StandingsFragment.
+     * @return A new instance of fragment TableStandingFullFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StandingsFragment newInstance(String param1, String param2) {
-        StandingsFragment fragment = new StandingsFragment();
+    public static TableStandingFullFragment newInstance(String param1, String param2) {
+        TableStandingFullFragment fragment = new TableStandingFullFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,20 +76,17 @@ public class StandingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_standings, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_table_standing_full, container, false);
 
         lvTableStangdings = (ListView) view.findViewById(R.id.lvTableStangdings);
         requestQueue = Volley.newRequestQueue(requireContext());
 
-        StringRequest request = new StringRequest(Request.Method.GET, urlClubStanding, new Response.Listener<String>() {
+        com.android.volley.toolbox.StringRequest request = new StringRequest(Request.Method.GET, urlClubStanding, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -164,5 +159,4 @@ public class StandingsFragment extends Fragment {
         requestQueue.add(request);
         return view;
     }
-
 }
