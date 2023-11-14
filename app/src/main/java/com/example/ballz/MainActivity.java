@@ -24,10 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
         addControls();
         events();
-
+//        loadFragment(new MainFrag());
 
 
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.page_2:
 
-                        loadFragment(new StandingsFragment());
                         return true;
                     case R.id.page_3:
 
@@ -50,11 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.page_4:
 
-                        loadFragment(new StandingsFragment());
                         return true;
-//                    case R.id.user:
-//                        loadFragment(new FragProfile());
-//                        return true;
                 }
                 return true;
             }

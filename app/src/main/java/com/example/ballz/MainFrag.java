@@ -1,13 +1,13 @@
 package com.example.ballz;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,8 +20,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class MainFrag extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -58,6 +63,20 @@ public class MainFrag extends Fragment {
 
         requestQueue = Volley.newRequestQueue(requireContext());
     }
+
+    public static String formatTime(String inputTime, String outputFormat) {
+        try {
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+            inputDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date date = inputDateFormat.parse(inputTime);
+
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat(outputFormat, Locale.getDefault());
+            return outputDateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
@@ -77,20 +96,14 @@ public class MainFrag extends Fragment {
                         JSONObject matchObject = summaryArray.getJSONObject(i);
                         JSONObject homeTeam = matchObject.getJSONObject("teams").getJSONObject("home");
                         JSONObject awayTeam = matchObject.getJSONObject("teams").getJSONObject("away");
-
-                        String logoHome = homeTeam.getString("icon");
-                        String logoAway = awayTeam.getString("icon");
+                        String logoHome = homeTeam.getString("shortName");
+                        String logoAway = awayTeam.getString("shortName");
                         String time = matchObject.getString("eventDateStart");
+                        String outputFormat = "dd/MM/yyyy HH:mm:ss";
+                        String formattedTime = formatTime(time, outputFormat);
                         int scoreHome = matchObject.getJSONObject("score").getJSONObject("total").getInt("home");
                         int scoreAway = matchObject.getJSONObject("score").getJSONObject("total").getInt("away");
-
-                        System.out.println("Logo Home: " + logoHome);
-                        System.out.println("Logo Away: " + logoAway);
-                        System.out.println("Time: " + time);
-                        System.out.println("Score Home: " + scoreHome);
-                        System.out.println("Score Away: " + scoreAway);
-
-                        Match match = new Match(logoAway, logoHome, time, String.valueOf(scoreHome), String.valueOf(scoreAway));
+                        Match match = new Match(logoAway, logoHome, formattedTime, String.valueOf(scoreHome), String.valueOf(scoreAway));
                         matchList.add(match);
                     }
                     adapter.notifyDataSetChanged();
@@ -106,7 +119,6 @@ public class MainFrag extends Fragment {
             }
         });
         requestQueue.add(request);
-
         return view;
     }
 }
