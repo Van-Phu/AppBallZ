@@ -2,7 +2,6 @@ package com.example.ballz;
 
 public class Match {
     String logoAway, logoHome, time, scoreHome, scoreAway;
-
     public Match(String logoAway, String logoHome, String time, String scoreHome, String scoreAway) {
         this.logoAway = logoAway;
         this.logoHome = logoHome;

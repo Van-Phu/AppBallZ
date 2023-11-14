@@ -3,12 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="80dp"
+    android:background="@drawable/background_new_match"
+    android:layout_marginBottom="20dp"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal"
         android:background="#222232"
         android:weightSum="3">
@@ -49,54 +53,13 @@
 
             <TextView
                 android:id="@+id/tvTime"
-                android:layout_width="match_parent"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:layout_marginBottom="20dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="40dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                >
-
-                <TextView
-                    android:id="@+id/tvScoreHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0"
-                    android:textColor="@color/white"
-                    android:textSize="30dp"
-                    android:gravity="right"/>
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="-"
-                    android:textSize="20dp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:gravity="center"/>
-
-                <TextView
-
-                    android:id="@+id/tvScoreAway"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="0"
-                    android:textColor="@color/white"
-                    android:textSize="30dp" />
-            </LinearLayout>
+               />
 
 
         </LinearLayout>

@@ -1,13 +1,14 @@
 package com.example.ballz;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,13 +36,15 @@ public class MainFrag extends Fragment {
     private String mParam1;
     private String mParam2;
     private List<Match> matchList = new ArrayList<>();
+    private List<NewMatch> newMatchList = new ArrayList<>();
     private MatchMainAdapter adapter;
 
-    String urlArtist = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1699289999&endDate=1699894799&orderAscending=false&region=za&platform=indaleko-web";
-
+    String urlOldMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1699289999&endDate=1699894799&orderAscending=false&region=za&platform=indaleko-web";
+    String urlNewMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=1,2&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1699808400&orderAscending=true&region=za&platform=indaleko-web";
     RequestQueue requestQueue;
 
     RecyclerView rclLst;
+    ListView lvNewMatch;
 
     public MainFrag() {
     }
@@ -80,13 +83,22 @@ public class MainFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        loadOldMatch();
+        loadNewMatch();
         rclLst = view.findViewById(R.id.rclLst);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        lvNewMatch = view.findViewById(R.id.lstNewMatch);
+        NewMatchMainAdapter newMatchAdaper = new NewMatchMainAdapter(requireContext(), R.layout.new_match_table_layout_custom, (ArrayList<NewMatch>) newMatchList);
+        lvNewMatch.setAdapter(newMatchAdaper);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         rclLst.setLayoutManager(layoutManager);
         adapter = new MatchMainAdapter(matchList);
         rclLst.setAdapter(adapter);
+        return view;
+    }
 
-        StringRequest request = new StringRequest(Request.Method.GET, urlArtist, new Response.Listener<String>() {
+    private void loadOldMatch(){
+        StringRequest request = new StringRequest(Request.Method.GET, urlOldMatch, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -119,7 +131,53 @@ public class MainFrag extends Fragment {
             }
         });
         requestQueue.add(request);
-        return view;
+    }
+
+    private void loadNewMatch(){
+        StringRequest request = new StringRequest(Request.Method.GET, urlNewMatch, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONArray summaryArray = jsonResponse.getJSONArray("Summary");
+                    for (int i = 0; i < 3; i++) {
+                        JSONObject matchObject = summaryArray.getJSONObject(i);
+                        JSONObject homeTeam = matchObject.getJSONObject("teams").getJSONObject("home");
+                        JSONObject awayTeam = matchObject.getJSONObject("teams").getJSONObject("away");
+                        String logoHome = homeTeam.getString("shortName");
+                        String logoAway = awayTeam.getString("shortName");
+                        String time = matchObject.getString("eventDateStart");
+                        String eventId = matchObject.getString("eventId");
+                        String outputFormat = "dd/MM/yyyy HH:mm:ss";
+                        String formattedTime = formatTime(time, outputFormat);
+                        String nameHome = homeTeam.getString("shortName");
+                        String nameAway = awayTeam.getString("shortName");
+//
+                        System.out.println(eventId);
+                        System.out.println(formattedTime);
+                        System.out.println(nameHome);
+                        System.out.println(nameAway);
+                        System.out.println(logoHome);
+                        System.out.println(logoAway);
+                        NewMatch newMatch = new NewMatch(eventId, formattedTime,nameHome, nameAway, logoHome, logoAway);
+                        newMatchList.add(newMatch);
+                    }
+                    System.out.println(newMatchList);
+                    adapter.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                NewMatchMainAdapter newMatchMainAdapter = new NewMatchMainAdapter(requireContext(), R.layout.new_match_table_layout_custom, (ArrayList<NewMatch>) newMatchList);
+                lvNewMatch.setAdapter(newMatchMainAdapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
     }
 }
 

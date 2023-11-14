@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFrag">
+    tools:context=".MainFrag"
+    android:background="#181928">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,6 +12,8 @@
         android:orientation="vertical"
         android:backgroundTint="#181928"
         android:background="#181928"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         >
 
         <LinearLayout
@@ -51,15 +54,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:orientation="vertical">
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginBottom="20dp">
 
                 <TextView
                     android:id="@+id/textView2"
@@ -80,6 +85,11 @@
                     android:gravity="right"
                     android:textColor="#D2B5FF"/>
             </LinearLayout>
+
+            <ListView
+                android:id="@+id/lstNewMatch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
