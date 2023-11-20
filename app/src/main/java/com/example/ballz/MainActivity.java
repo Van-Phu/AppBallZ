@@ -18,25 +18,16 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottom_navigation;
     FrameLayout fragMain;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addControls();
-
-
-
-        addEvents();
+        events();
         loadFragment(new MainFrag());
-
-
-
-
     }
 
-    private void addEvents() {
+    private void events() {
         bottom_navigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -55,13 +46,12 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new StandingsFragment());
                         return true;
                     case R.id.page_4:
-                        loadFragment(new TableStandingFullFragment());
+
                         return true;
                 }
                 return true;
             }
         });
-
     }
 
     private void addControls() {
