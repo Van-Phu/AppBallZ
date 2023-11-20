@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -69,7 +70,6 @@ public class TableStandingFullFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,36 +78,22 @@ public class TableStandingFullFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_table_standing_full, container, false);
-
         lvTableStangdings = (ListView) view.findViewById(R.id.lvTableStangdings);
         requestQueue = Volley.newRequestQueue(requireContext());
-
         com.android.volley.toolbox.StringRequest request = new StringRequest(Request.Method.GET, urlClubStanding, new Response.Listener<String>() {
-
             @Override
             public void onResponse(String response) {
-
-                System.out.println("heloooooooooooooooo");
-
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    System.out.println("heloooooooooooooooo");
-
-                    // Lấy mảng JSON "conferences"
                     JSONArray conferences = jsonObject.getJSONArray("conferences");
-
                     for (int i = 0; i < conferences.length(); i++) {
                         JSONObject conference = conferences.getJSONObject(i);
-
                         // Lấy mảng JSON "divisions" từ mỗi "conference"
                         JSONArray divisions = conference.getJSONArray("divisions");
-
-
                         for (int j = 0; j < divisions.length(); j++) {
                             JSONObject division = divisions.getJSONObject(j);
                             JSONArray teams = division.getJSONArray("teams");
@@ -116,30 +102,17 @@ public class TableStandingFullFragment extends Fragment {
                                 JSONObject team = clubStandingJson.getJSONObject("team");
                                 JSONObject logs = clubStandingJson.getJSONObject("logs");
 //                                System.out.println(team);
-
                                 String img = team.getString("icon");
                                 String nameClub = team.getString("name");
                                 String winNumb = logs.getString("wins");
                                 String drawNumb = logs.getString("draws");
                                 String loseNumb = logs.getString("losses");
                                 String point = logs.getString("points");
-
-
-                                System.out.println("icon"+img);
-                                System.out.println("shortName"+nameClub);
-                                System.out.println("shortName"+nameClub);
-                                System.out.println("wins"+winNumb);
-                                System.out.println("draws"+drawNumb);
-                                System.out.println("losses"+loseNumb);
-                                System.out.println("points"+point);
-
-//
                                 ClubStanding clubStanding = new ClubStanding(img, nameClub, winNumb, drawNumb, loseNumb, point);
                                 clubStandingArrayList.add(clubStanding);
                             }
                         }
                     }
-
                     if (getActivity() != null) {
                         if (adapterTableStandings == null) {
                             adapterTableStandings = new customTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
@@ -150,9 +123,6 @@ public class TableStandingFullFragment extends Fragment {
                     } else {
                         Log.e("StandingsFragment", "Activity is null");
                     }
-
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -164,6 +134,12 @@ public class TableStandingFullFragment extends Fragment {
             }
         });
         requestQueue.add(request);
+        lvTableStangdings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            }
+        });
+
         return view;
     }
 }
