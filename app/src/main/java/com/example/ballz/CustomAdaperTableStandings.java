@@ -12,14 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import com.squareup.picasso.Picasso;
 
-public class customTableStandings extends ArrayAdapter {
+public class CustomAdaperTableStandings extends ArrayAdapter {
     Context context;
     int layoutItem;
     ArrayList<ClubStanding> lsClubStanding = new ArrayList<>();
 
-    public customTableStandings(@NonNull Context context, int resource, ArrayList<ClubStanding> lsClubStanding) {
+    public CustomAdaperTableStandings(@NonNull Context context, int resource, ArrayList<ClubStanding> lsClubStanding) {
         super(context, resource, lsClubStanding);
 
         this.context = context;

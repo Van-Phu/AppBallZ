@@ -11,16 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
-public class NewMatchMainAdapter extends ArrayAdapter {
+public class CustomAdapterNewMatchMain extends ArrayAdapter {
     Context context;
     int layoutItem;
     ArrayList<NewMatch> lstNewMatch = new ArrayList<>();
 
-    public NewMatchMainAdapter(@NonNull Context context, int resource, ArrayList<NewMatch> lstNewMatch) {
+    public CustomAdapterNewMatchMain(@NonNull Context context, int resource, ArrayList<NewMatch> lstNewMatch) {
         super(context, resource, lstNewMatch);
         this.context = context;
         this.layoutItem = resource;
@@ -50,7 +48,7 @@ public class NewMatchMainAdapter extends ArrayAdapter {
 
     private void checkIcon(String icon, ImageView view) {
         switch (icon) {
-            case "Man City":
+            case "Man City ":
                 view.setImageResource(R.drawable.manchester_city);
                 break;
             case "Chelsea":
@@ -68,10 +66,10 @@ public class NewMatchMainAdapter extends ArrayAdapter {
             case "Forest":
                 view.setImageResource(R.drawable.nottingham);
                 break;
-            case "Aston Villla":
+            case "Aston Villa":
                 view.setImageResource(R.drawable.astonvilla);
                 break;
-            case "Fullham":
+            case "Fulham":
                 view.setImageResource(R.drawable.fulham);
                 break;
             case "Brighton":

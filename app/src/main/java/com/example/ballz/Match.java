@@ -1,13 +1,22 @@
 package com.example.ballz;
 
 public class Match {
-    String logoAway, logoHome, time, scoreHome, scoreAway;
-    public Match(String logoAway, String logoHome, String time, String scoreHome, String scoreAway) {
+    String logoAway, logoHome, time, scoreHome, scoreAway, idFeed;
+    public Match(String logoAway, String logoHome, String time, String scoreHome, String scoreAway, String idFeed) {
         this.logoAway = logoAway;
         this.logoHome = logoHome;
         this.time = time;
         this.scoreHome = scoreHome;
         this.scoreAway = scoreAway;
+        this.idFeed = idFeed;
+    }
+
+    public String getIdFeed() {
+        return idFeed;
+    }
+
+    public void setIdFeed(String idFeed) {
+        this.idFeed = idFeed;
     }
 
     public String getLogoAway() {

@@ -1,30 +1,33 @@
 package com.example.ballz;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottom_navigation;
     FrameLayout fragMain;
+    SharedViewModel sharedViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addControls();
         events();
-        loadFragment(new MainFrag());
+        loadFragment(new FragmentMain());
+        loadFragment(new FragmentMain());
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+        events();
     }
 
     private void events() {
@@ -34,19 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id){
                     case R.id.page_1:
-
-                        loadFragment(new MainFrag());
+                        loadFragment(new FragmentMain());
                         return true;
-
                     case R.id.page_2:
-
                         return true;
                     case R.id.page_3:
-
-                        loadFragment(new StandingsFragment());
+                        loadFragment(new FragmentStandings());
                         return true;
                     case R.id.page_4:
-
+                        loadFragment(new FragmentTableStandingFull());
                         return true;
                 }
                 return true;

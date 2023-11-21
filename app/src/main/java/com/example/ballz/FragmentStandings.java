@@ -3,8 +3,10 @@ package com.example.ballz;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -34,10 +36,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StandingsFragment#newInstance} factory method to
+ * Use the {@link FragmentStandings#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StandingsFragment extends Fragment {
+public class FragmentStandings extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,8 +53,9 @@ public class StandingsFragment extends Fragment {
 
     ArrayList<TopScores> arrayListTopScores = new ArrayList<>();
     ListView lvTableStangdings, lvTopScorers;
-    customTableStandings adapterTableStandings;
     CustomTopScores adapterTopScores;
+
+    CustomAdaperTableStandings adapterTableStandings;
     RequestQueue requestQueue;
     TextView tvSeeAllStandingTable, tvAllTopScoresPlayer;
     FrameLayout fragMain;
@@ -60,7 +63,7 @@ public class StandingsFragment extends Fragment {
     String urlClubStanding = "https://supersport.com/apix/football/v5/tours/c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6/table-logs";
     String urlTopScores = "https://gw.vnexpress.net/football/topscorer?league_id=5267";
 
-    public StandingsFragment() {
+    public FragmentStandings() {
         // Required empty public constructor
     }
 
@@ -73,8 +76,8 @@ public class StandingsFragment extends Fragment {
      * @return A new instance of fragment StandingsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StandingsFragment newInstance(String param1, String param2) {
-        StandingsFragment fragment = new StandingsFragment();
+    public static FragmentStandings newInstance(String param1, String param2) {
+        FragmentStandings fragment = new FragmentStandings();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -91,7 +94,6 @@ public class StandingsFragment extends Fragment {
         }
     }
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -101,16 +103,23 @@ public class StandingsFragment extends Fragment {
         lvTableStangdings = (ListView) view.findViewById(R.id.lvTableStangdings);
         requestQueue = Volley.newRequestQueue(requireContext());
 
+        FragmentManager fm = getParentFragmentManager();
+        fm.setFragmentResultListener("keyMain", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                String rs = result.getString("result");
+                Toast.makeText(requireContext(), "id: " + rs, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         StringRequest request = new StringRequest(Request.Method.GET, urlClubStanding, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    // Lấy mảng JSON "conferences"
                     JSONArray conferences = jsonObject.getJSONArray("conferences");
                     for (int i = 0; i < conferences.length(); i++) {
                         JSONObject conference = conferences.getJSONObject(i);
-                        // Lấy mảng JSON "divisions" từ mỗi "conference"
                         JSONArray divisions = conference.getJSONArray("divisions");
                         for (int j = 0; j < divisions.length(); j++) {
                             JSONObject division = divisions.getJSONObject(j);
@@ -133,7 +142,7 @@ public class StandingsFragment extends Fragment {
 
                     if (getActivity() != null) {
                         if (adapterTableStandings == null) {
-                            adapterTableStandings = new customTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
+                            adapterTableStandings = new CustomAdaperTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
                             lvTableStangdings.setAdapter(adapterTableStandings);
                         } else {
                             adapterTableStandings.notifyDataSetChanged();
@@ -155,23 +164,16 @@ public class StandingsFragment extends Fragment {
             }
         });
         requestQueue.add(request);
-
-
-
-        //click hiện Bảng full
         tvSeeAllStandingTable = (TextView) view.findViewById(R.id.tvSeeAllStandingTable);
         tvSeeAllStandingTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(new TableStandingFullFragment());
+                loadFragment(new FragmentTableStandingFull());
             }
         });
 
-
-
         lvTopScorers = (ListView) view.findViewById(R.id.lvTopScorers);
         requestQueue = Volley.newRequestQueue(requireContext());
-
         StringRequest request1 = new StringRequest(Request.Method.GET, urlTopScores, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -180,8 +182,6 @@ public class StandingsFragment extends Fragment {
                     JSONObject data = jsonObject.getJSONObject("data");
                     JSONObject leagueData = data.getJSONObject("5267");
                     JSONArray players = leagueData.getJSONArray("data");
-
-                    // Tạo danh sách cầu thủ và sắp xếp theo totalGoals giảm dần
                     ArrayList<TopScores> topScoresList = new ArrayList<>();
                     for (int i = 0; i < players.length(); i++) {
                         JSONObject player = players.getJSONObject(i);

@@ -27,7 +27,7 @@
 
             <TextView
                 android:id="@+id/tvHome"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="slot 1"
@@ -80,7 +80,7 @@
             <TextView
                 android:gravity="right"
                 android:id="@+id/tvAway"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="slot 2"
