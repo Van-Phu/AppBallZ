@@ -70,6 +70,8 @@
         LinearLayout teamContainer;
         String rs = "";
         String urlMatch = "";
+        String scoreHome = "";
+        String scoreAway = "";
 
         public FragmentFinalSocer() {
             // Required empty public constructor
@@ -123,20 +125,6 @@
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_final_score_frg, container, false);
 
-            FragmentManager fm = getParentFragmentManager();
-            fm.setFragmentResultListener("keyMain", this, new FragmentResultListener() {
-                @Override
-                public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                    rs = result.getString("result");
-                    urlMatch += urlStart + rs + urlEnd;
-                    Toast.makeText(requireContext(), urlMatch, Toast.LENGTH_SHORT).show();
-                    loadInforScore(urlMatch);
-                    loadInfornScore(urlMatch);
-                }
-            });
-
-            Log.d("Tab", urlMatch);
-
             requestQueue = Volley.newRequestQueue(requireContext());
             tvHS = view.findViewById(R.id.tvHS);
             tvAS = view.findViewById(R.id.tvAS);
@@ -163,66 +151,33 @@
             goalsTextView = view.findViewById(R.id.tv);
             teamContainer = view.findViewById(R.id.teamContainer);
 //            chainaddition();
-//            loadOldMatch();
+
+            FragmentManager fm = getParentFragmentManager();
+            fm.setFragmentResultListener("keyMain", this, new FragmentResultListener() {
+                @Override
+                public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                    rs = result.getString("result");
+                    scoreHome = result.getString("home");
+                    scoreAway = result.getString("away");
+                    urlMatch += urlStart + rs + urlEnd;
+                    Toast.makeText(requireContext(), urlMatch, Toast.LENGTH_SHORT).show();
+                    tvHS.setText(scoreHome);
+                    tvAS.setText(scoreAway);
+                    loadInforScore(urlMatch);
+                    loadInfornScore(urlMatch);
+                }
+            });
+
 
             return view;
 
         }
 
-//        private void loadOldMatch() {
-//            StringRequest request = new StringRequest(Request.Method.GET, urlScore, new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response) {
-//                    try {
-//                        JSONObject jsonResponse = new JSONObject(response);
-//                        JSONObject status = jsonResponse.getJSONObject("Summary");
-//                        JSONObject score = status.getJSONObject("score");
-//                        JSONObject Hscore = score.getJSONObject("home");
-//                        JSONObject Ascore = score.getJSONObject("away");
-//
-//                        // Retrieve and set the home and away scores
-//                        String homeScore = Hscore.getString("current");
-//                        String awayScore = Ascore.getString("current");
-//                        tvHS.setText(homeScore);
-//                        tvAS.setText(awayScore);
-//
-//                    } catch (JSONException ex) {
-//                        throw new RuntimeException(ex);
-//                    }
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    error.printStackTrace();
-//                }
-//            });
-//            requestQueue.add(request);
-//        }
 
 
 
-        private  void chainaddition(){
-            StringRequest request = new StringRequest(Request.Method.GET, urlScore, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        JSONObject Summary = jsonObject.getJSONObject("Summary");
-                        JSONObject feedId = Summary.getJSONObject("feedId");
 
-                         urlFinalScore = "https://supersport.com/apix/football/v5/matches/a099b475-8114-4c8b-96a0-0211c5454b2d/events-and-stats";
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
-                }
-            });
-            requestQueue.add(request);
-        }
+
         private void loadInforScore(String url) {
             StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 public void onResponse(String response) {

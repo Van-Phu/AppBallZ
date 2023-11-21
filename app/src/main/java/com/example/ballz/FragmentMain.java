@@ -120,8 +120,13 @@ public class FragmentMain extends Fragment {
             @Override
             public void onItemClick(Match match) {
                 String result = String.valueOf(match.getIdFeed());
+                String homeScore = match.getScoreHome();
+                String awayScore = match.getScoreAway();
                 Bundle bundle = new Bundle();
                 bundle.putString("result", result);
+                bundle.putString("home", homeScore);
+                bundle.putString("away", awayScore);
+
                 FragmentManager fm = getParentFragmentManager();
                 fm.setFragmentResult("keyMain", bundle);
                 loadFragment(new FragmentFinalSocer());
