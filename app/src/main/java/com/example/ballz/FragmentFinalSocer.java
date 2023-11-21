@@ -1,16 +1,23 @@
     package com.example.ballz;
 
+    import static android.content.ContentValues.TAG;
+
     import android.annotation.SuppressLint;
     import android.graphics.Color;
     import android.os.Bundle;
 
+    import androidx.annotation.NonNull;
     import androidx.fragment.app.Fragment;
+    import androidx.fragment.app.FragmentManager;
+    import androidx.fragment.app.FragmentResultListener;
 
+    import android.util.Log;
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
     import android.widget.LinearLayout;
     import android.widget.TextView;
+    import android.widget.Toast;
 
     import com.android.volley.Request;
     import com.android.volley.RequestQueue;
@@ -54,11 +61,15 @@
 //        private String urlFinalScore;
 
        String urlFinalScore = "https://supersport.com/apix/football/v5/matches/a099b475-8114-4c8b-96a0-0211c5454b2d/events-and-stats";
+       String urlStart = "https://supersport.com/apix/football/v5/matches/";
+       String urlEnd = "/events-and-stats";
         String urlScore = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1699289999&endDate=1699894799&orderAscending=false&region=za&platform=indaleko-web";
         TextView tvHS, tvAS, tvHShots, tvAShots, tvHsot, tvAsot, tvHcorner,
                 tvAcorner, tvHoffsides, tvAoffsides, tvHcs, tvAcs, tvHblp, tvAblp,
                 tvHylc, tvAylc, tvHrc, tvArc, tvHtp, tvAtp, tvHbls, tvAbls, goalsTextView;
         LinearLayout teamContainer;
+        String rs = "";
+        String urlMatch = "";
 
         public FragmentFinalSocer() {
             // Required empty public constructor
@@ -103,6 +114,7 @@
                 mParam1 = getArguments().getString(ARG_PARAM1);
                 mParam2 = getArguments().getString(ARG_PARAM2);
             }
+
         }
 
 
@@ -110,6 +122,21 @@
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_final_score_frg, container, false);
+
+            FragmentManager fm = getParentFragmentManager();
+            fm.setFragmentResultListener("keyMain", this, new FragmentResultListener() {
+                @Override
+                public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                    rs = result.getString("result");
+                    urlMatch += urlStart + rs + urlEnd;
+                    Toast.makeText(requireContext(), urlMatch, Toast.LENGTH_SHORT).show();
+                    loadInforScore(urlMatch);
+                    loadInfornScore(urlMatch);
+                }
+            });
+
+            Log.d("Tab", urlMatch);
+
             requestQueue = Volley.newRequestQueue(requireContext());
             tvHS = view.findViewById(R.id.tvHS);
             tvAS = view.findViewById(R.id.tvAS);
@@ -137,8 +164,7 @@
             teamContainer = view.findViewById(R.id.teamContainer);
 //            chainaddition();
 //            loadOldMatch();
-            loadInforScore();
-            loadInfornScore();
+
             return view;
 
         }
@@ -197,8 +223,8 @@
             });
             requestQueue.add(request);
         }
-        private void loadInforScore() {
-            StringRequest request = new StringRequest(Request.Method.GET, urlFinalScore, new Response.Listener<String>() {
+        private void loadInforScore(String url) {
+            StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 public void onResponse(String response) {
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
@@ -238,8 +264,8 @@
                     bls.setText(values.getString("blockedShots"));
                 }
 
-                private void loadInfornScore() {
-                    StringRequest request = new StringRequest(Request.Method.GET, urlFinalScore, new Response.Listener<String>() {
+                private void loadInfornScore(String url) {
+                    StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {

@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,12 +119,12 @@ public class FragmentMain extends Fragment {
         adapter = new CustomAdapterMatchMain(matchList, new CustomAdapterMatchMain.OnItemClickListener() {
             @Override
             public void onItemClick(Match match) {
-                String result = String.valueOf( match.getIdFeed());
+                String result = String.valueOf(match.getIdFeed());
                 Bundle bundle = new Bundle();
                 bundle.putString("result", result);
                 FragmentManager fm = getParentFragmentManager();
                 fm.setFragmentResult("keyMain", bundle);
-                loadFragment(new FragmentStandings()); //thay bang frag mở
+                loadFragment(new FragmentFinalSocer());
             }
         });
         rclLst.setAdapter(adapter);
@@ -131,10 +132,11 @@ public class FragmentMain extends Fragment {
         return view;
     }
 
+
     public void loadFragment(Fragment fragment){
-        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.FragmentMain, fragment);
+        fragmentTransaction.replace(R.id.fragMain, fragment);
         fragmentTransaction.commit();
     }
 

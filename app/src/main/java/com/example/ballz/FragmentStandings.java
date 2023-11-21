@@ -102,16 +102,6 @@ public class FragmentStandings extends Fragment {
 
         lvTableStangdings = (ListView) view.findViewById(R.id.lvTableStangdings);
         requestQueue = Volley.newRequestQueue(requireContext());
-
-        FragmentManager fm = getParentFragmentManager();
-        fm.setFragmentResultListener("keyMain", this, new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String rs = result.getString("result");
-                Toast.makeText(requireContext(), "id: " + rs, Toast.LENGTH_SHORT).show();
-            }
-        });
-
         StringRequest request = new StringRequest(Request.Method.GET, urlClubStanding, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
