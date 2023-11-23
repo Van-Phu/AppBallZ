@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void addControls() {
         fragMain = (FrameLayout) findViewById(R.id.fragMain);
         bottom_navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -63,4 +62,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragMain, fragment);
         fragmentTransaction.commit();
     }
+
 }
