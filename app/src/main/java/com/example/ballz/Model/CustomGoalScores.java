@@ -1,27 +1,26 @@
-package com.example.ballz;
+package com.example.ballz.Model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.squareup.picasso.Picasso;
+import com.example.ballz.R;
 
 import java.util.ArrayList;
 
-public class CustomTopScores extends ArrayAdapter {
+public class CustomGoalScores extends ArrayAdapter {
     Context context;
     int layoutItem;
 
-    ArrayList<TopScores> lsTopScores = new ArrayList<>();
+    ArrayList<GoalScored> lsTopScores = new ArrayList<>();
 
-    public CustomTopScores(@NonNull Context context, int resource, ArrayList<TopScores> lsTopScores) {
+    public CustomGoalScores(@NonNull Context context, int resource, ArrayList<GoalScored> lsTopScores) {
         super(context, resource, lsTopScores);
         this.context = context;
         this.layoutItem = resource;
@@ -30,7 +29,7 @@ public class CustomTopScores extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        TopScores topScores = lsTopScores.get(position);
+        GoalScored topScores = lsTopScores.get(position);
         if(convertView==null)
         {
             convertView= LayoutInflater.from(context).inflate(layoutItem,null);

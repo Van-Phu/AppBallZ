@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentStandings"
+    tools:context=".View.FragmentStandings"
     android:background="#181928"
     android:id="@+id/fragStangding"
     >
@@ -149,7 +149,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="left|center"
-                        android:text="Table Standings"
+                        android:text="Goals Scored"
                         android:textColor="@color/white"
                         android:textSize="25dp"
                         android:textStyle="bold" />

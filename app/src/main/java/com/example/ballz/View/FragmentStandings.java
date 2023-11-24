@@ -1,12 +1,10 @@
-package com.example.ballz;
+package com.example.ballz.View;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -25,6 +23,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ballz.Model.ClubStanding;
+import com.example.ballz.Model.CustomAdaperTableStandings;
+import com.example.ballz.Model.CustomGoalScores;
+import com.example.ballz.R;
+import com.example.ballz.Model.GoalScored;
+import com.example.ballz.Model.GoalScoredComparator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +36,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,9 +54,9 @@ public class FragmentStandings extends Fragment {
     private String mParam2;
     private ArrayList<ClubStanding> clubStandingArrayList = new ArrayList<>();
 
-    ArrayList<TopScores> arrayListTopScores = new ArrayList<>();
+    ArrayList<GoalScored> arrayListTopScores = new ArrayList<>();
     ListView lvTableStangdings, lvTopScorers;
-    CustomTopScores adapterTopScores;
+    CustomGoalScores adapterTopScores;
 
     CustomAdaperTableStandings adapterTableStandings;
     RequestQueue requestQueue;
@@ -172,7 +175,7 @@ public class FragmentStandings extends Fragment {
                     JSONObject data = jsonObject.getJSONObject("data");
                     JSONObject leagueData = data.getJSONObject("5267");
                     JSONArray players = leagueData.getJSONArray("data");
-                    ArrayList<TopScores> topScoresList = new ArrayList<>();
+                    ArrayList<GoalScored> topScoresList = new ArrayList<>();
                     for (int i = 0; i < players.length(); i++) {
                         JSONObject player = players.getJSONObject(i);
                         String playerName = player.getString("player_name");
@@ -181,15 +184,15 @@ public class FragmentStandings extends Fragment {
                         if (goals != null && goals.has("total")) {
                             totalGoals = goals.getInt("total");
                         }
-                        TopScores topScores = new TopScores(totalGoals, playerName);
+                        GoalScored topScores = new GoalScored(totalGoals, playerName);
                         topScoresList.add(topScores);
                     }
-                    Collections.sort(topScoresList, new TopScoresComparator());
+                    Collections.sort(topScoresList, new GoalScoredComparator());
                     for (int i = 0; i < topScoresList.size(); i++) {
                         topScoresList.get(i).setTeam_name(String.valueOf(i + 1));
                     }
                     if (getActivity() != null) {
-                        adapterTopScores = new CustomTopScores(getActivity(), R.layout.layout_item_top_scores, topScoresList);
+                        adapterTopScores = new CustomGoalScores(getActivity(), R.layout.layout_item_goal_scores, topScoresList);
                         lvTopScorers.setAdapter(adapterTopScores);
                     } else {
                         Log.e("StandingsFragment", "Activity is null");

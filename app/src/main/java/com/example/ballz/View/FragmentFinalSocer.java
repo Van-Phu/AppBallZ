@@ -1,6 +1,4 @@
-    package com.example.ballz;
-
-    import static android.content.ContentValues.TAG;
+    package com.example.ballz.View;
 
     import android.annotation.SuppressLint;
     import android.graphics.Color;
@@ -11,7 +9,6 @@
     import androidx.fragment.app.FragmentManager;
     import androidx.fragment.app.FragmentResultListener;
 
-    import android.util.Log;
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
@@ -25,6 +22,7 @@
     import com.android.volley.VolleyError;
     import com.android.volley.toolbox.StringRequest;
     import com.android.volley.toolbox.Volley;
+    import com.example.ballz.R;
 
     import org.json.JSONArray;
     import org.json.JSONException;

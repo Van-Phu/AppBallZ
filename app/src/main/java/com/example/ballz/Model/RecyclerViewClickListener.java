@@ -1,4 +1,4 @@
-package com.example.ballz;
+package com.example.ballz.Model;
 
 import android.view.View;
 

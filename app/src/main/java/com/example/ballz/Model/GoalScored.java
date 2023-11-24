@@ -1,10 +1,10 @@
-package com.example.ballz;
+package com.example.ballz.Model;
 
-public class TopScores {
+public class GoalScored {
     String  player_name, team_name;
     int goals;
 
-    public TopScores(int goals, String player_name) {
+    public GoalScored(int goals, String player_name) {
         this.goals = goals;
         this.player_name = player_name;
     }

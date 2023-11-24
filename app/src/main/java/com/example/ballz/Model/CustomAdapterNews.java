@@ -1,4 +1,4 @@
-package com.example.ballz;
+package com.example.ballz.Model;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.ballz.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

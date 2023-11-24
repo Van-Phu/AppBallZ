@@ -1,4 +1,4 @@
-package com.example.ballz;
+package com.example.ballz.View;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +10,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +24,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ballz.Model.CustomAdapterMatchMain;
+import com.example.ballz.Model.CustomAdapterNewMatchMain;
+import com.example.ballz.Model.CustomAdapterNews;
+import com.example.ballz.Model.Match;
+import com.example.ballz.Model.NewMatch;
+import com.example.ballz.Model.News;
+import com.example.ballz.R;
+import com.example.ballz.Model.SharedViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;

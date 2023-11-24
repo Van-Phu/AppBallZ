@@ -1,4 +1,4 @@
-package com.example.ballz;
+package com.example.ballz.Model;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

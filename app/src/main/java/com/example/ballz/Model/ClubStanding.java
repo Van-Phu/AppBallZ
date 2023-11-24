@@ -1,4 +1,4 @@
-package com.example.ballz;
+package com.example.ballz.Model;
 
 public class ClubStanding {
     String img;
