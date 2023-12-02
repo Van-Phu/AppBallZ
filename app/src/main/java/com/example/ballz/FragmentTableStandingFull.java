@@ -27,10 +27,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TableStandingFullFragment#newInstance} factory method to
+ * Use the {@link FragmentTableStandingFull#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TableStandingFullFragment extends Fragment {
+public class FragmentTableStandingFull extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,12 +44,12 @@ public class TableStandingFullFragment extends Fragment {
     private ArrayList<ClubStanding> clubStandingArrayList = new ArrayList<>();
 
     ListView lvTableStangdings;
-    customTableStandings adapterTableStandings;
+    CustomAdaperTableStandings adapterTableStandings;
     RequestQueue requestQueue;
 
     String urlClubStanding = "https://supersport.com/apix/football/v5/tours/c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6/table-logs";
 
-    public TableStandingFullFragment() {
+    public FragmentTableStandingFull() {
         // Required empty public constructor
     }
 
@@ -62,8 +62,8 @@ public class TableStandingFullFragment extends Fragment {
      * @return A new instance of fragment TableStandingFullFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TableStandingFullFragment newInstance(String param1, String param2) {
-        TableStandingFullFragment fragment = new TableStandingFullFragment();
+    public static FragmentTableStandingFull newInstance(String param1, String param2) {
+        FragmentTableStandingFull fragment = new FragmentTableStandingFull();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -115,7 +115,7 @@ public class TableStandingFullFragment extends Fragment {
                     }
                     if (getActivity() != null) {
                         if (adapterTableStandings == null) {
-                            adapterTableStandings = new customTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
+                            adapterTableStandings = new CustomAdaperTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
                             lvTableStangdings.setAdapter(adapterTableStandings);
                         } else {
                             adapterTableStandings.notifyDataSetChanged();

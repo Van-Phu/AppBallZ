@@ -29,15 +29,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StandingsFragment#newInstance} factory method to
+ * Use the {@link FragmentStandings#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StandingsFragment extends Fragment {
+public class FragmentStandings extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,18 +47,20 @@ public class StandingsFragment extends Fragment {
     private String mParam2;
     private ArrayList<ClubStanding> clubStandingArrayList = new ArrayList<>();
 
-    ArrayList<TopScores> arrayListTopScores = new ArrayList<>();
+    ArrayList<GoalScores> arrayListGoalScores = new ArrayList<>();
     ListView lvTableStangdings, lvTopScorers;
-    customTableStandings adapterTableStandings;
-    CustomTopScores adapterTopScores;
+    CustomGoalScores adapterTopScores;
+
+    CustomAdaperTableStandings adapterTableStandings;
     RequestQueue requestQueue;
     TextView tvSeeAllStandingTable, tvAllTopScoresPlayer;
     FrameLayout fragMain;
 
     String urlClubStanding = "https://supersport.com/apix/football/v5/tours/c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6/table-logs";
-    String urlTopScores = "https://gw.vnexpress.net/football/topscorer?league_id=5267";
 
-    public StandingsFragment() {
+    String urlGoalScores = "https://www.fotmob.com/api/leagueseasondeepstats?id=47&season=20720&type=players&stat=goals&slug=premier-league-players";
+
+    public FragmentStandings() {
         // Required empty public constructor
     }
 
@@ -73,8 +73,8 @@ public class StandingsFragment extends Fragment {
      * @return A new instance of fragment StandingsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StandingsFragment newInstance(String param1, String param2) {
-        StandingsFragment fragment = new StandingsFragment();
+    public static FragmentStandings newInstance(String param1, String param2) {
+        FragmentStandings fragment = new FragmentStandings();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -91,7 +91,6 @@ public class StandingsFragment extends Fragment {
         }
     }
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -100,17 +99,14 @@ public class StandingsFragment extends Fragment {
 
         lvTableStangdings = (ListView) view.findViewById(R.id.lvTableStangdings);
         requestQueue = Volley.newRequestQueue(requireContext());
-
         StringRequest request = new StringRequest(Request.Method.GET, urlClubStanding, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    // Lấy mảng JSON "conferences"
                     JSONArray conferences = jsonObject.getJSONArray("conferences");
                     for (int i = 0; i < conferences.length(); i++) {
                         JSONObject conference = conferences.getJSONObject(i);
-                        // Lấy mảng JSON "divisions" từ mỗi "conference"
                         JSONArray divisions = conference.getJSONArray("divisions");
                         for (int j = 0; j < divisions.length(); j++) {
                             JSONObject division = divisions.getJSONObject(j);
@@ -130,10 +126,9 @@ public class StandingsFragment extends Fragment {
                             }
                         }
                     }
-
                     if (getActivity() != null) {
                         if (adapterTableStandings == null) {
-                            adapterTableStandings = new customTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
+                            adapterTableStandings = new CustomAdaperTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
                             lvTableStangdings.setAdapter(adapterTableStandings);
                         } else {
                             adapterTableStandings.notifyDataSetChanged();
@@ -141,8 +136,6 @@ public class StandingsFragment extends Fragment {
                     } else {
                         Log.e("StandingsFragment", "Activity is null");
                     }
-
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -155,55 +148,51 @@ public class StandingsFragment extends Fragment {
             }
         });
         requestQueue.add(request);
-
-
-
-        //click hiện Bảng full
         tvSeeAllStandingTable = (TextView) view.findViewById(R.id.tvSeeAllStandingTable);
+        tvAllTopScoresPlayer = (TextView) view.findViewById(R.id.tvAllTopScoresPlayer);
         tvSeeAllStandingTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadFragment(new TableStandingFullFragment());
+                loadFragment(new FragmentTableStandingFull());
+            }
+        });
+        tvAllTopScoresPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new FragmentAllGoalScores());
             }
         });
 
-
-
         lvTopScorers = (ListView) view.findViewById(R.id.lvTopScorers);
         requestQueue = Volley.newRequestQueue(requireContext());
-
-        StringRequest request1 = new StringRequest(Request.Method.GET, urlTopScores, new Response.Listener<String>() {
+        StringRequest request1 = new StringRequest(Request.Method.GET, urlGoalScores, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    JSONObject data = jsonObject.getJSONObject("data");
-                    JSONObject leagueData = data.getJSONObject("5267");
-                    JSONArray players = leagueData.getJSONArray("data");
+                    JSONArray statsDataArray = jsonObject.getJSONArray("statsData");
 
-                    // Tạo danh sách cầu thủ và sắp xếp theo totalGoals giảm dần
-                    ArrayList<TopScores> topScoresList = new ArrayList<>();
-                    for (int i = 0; i < players.length(); i++) {
-                        JSONObject player = players.getJSONObject(i);
-                        String playerName = player.getString("player_name");
-                        JSONObject goals = player.optJSONObject("goals");
-                        int totalGoals = 0;
-                        if (goals != null && goals.has("total")) {
-                            totalGoals = goals.getInt("total");
-                        }
-                        TopScores topScores = new TopScores(totalGoals, playerName);
-                        topScoresList.add(topScores);
-                    }
-                    Collections.sort(topScoresList, new TopScoresComparator());
-                    for (int i = 0; i < topScoresList.size(); i++) {
-                        topScoresList.get(i).setTeam_name(String.valueOf(i + 1));
+                    for (int i = 0; i < statsDataArray.length(); i++) {
+                        JSONObject statsData = statsDataArray.getJSONObject(i);
+                        int teamId = statsData.getInt("teamId");
+                        String name = statsData.getJSONObject("nameAndSubstatValue").getString("name");
+                        int goal = statsData.getInt("statValue");
+                        int rank = statsData.getInt("rank");
+                        // Tạo đối tượng GoalScores từ dữ liệu lấy được
+                        GoalScores goalScores = new GoalScores(name, goal, rank);
+                        arrayListGoalScores.add(goalScores);
                     }
                     if (getActivity() != null) {
-                        adapterTopScores = new CustomTopScores(getActivity(), R.layout.layout_item_top_scores, topScoresList);
-                        lvTopScorers.setAdapter(adapterTopScores);
+                        if (adapterTopScores == null) {
+                            adapterTopScores = new CustomGoalScores(getActivity(), R.layout.layout_item_goal_scores, arrayListGoalScores);
+                            lvTopScorers.setAdapter(adapterTopScores);
+                        } else {
+                            adapterTopScores.notifyDataSetChanged();
+                        }
                     } else {
                         Log.e("StandingsFragment", "Activity is null");
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

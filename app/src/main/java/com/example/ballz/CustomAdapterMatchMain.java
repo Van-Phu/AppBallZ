@@ -12,12 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MatchMainAdapter extends RecyclerView.Adapter<MatchMainAdapter.ViewHolder> {
+public class CustomAdapterMatchMain extends RecyclerView.Adapter<CustomAdapterMatchMain.ViewHolder> {
     Context context;
     private List<Match> itemList;
+    private OnItemClickListener listener;
 
-    public MatchMainAdapter(List<Match> itemList) {
+    public interface OnItemClickListener {
+        void onItemClick(Match match);
+    }
+
+    public CustomAdapterMatchMain(List<Match> itemList, OnItemClickListener listener) {
         this.itemList = itemList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -38,40 +44,38 @@ public class MatchMainAdapter extends RecyclerView.Adapter<MatchMainAdapter.View
         return itemList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView nameAway, nameHome, time, scoreHome, scoreAway;
+        TextView time, scoreHome, scoreAway;
         ImageView iconAway, iconHome;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            nameAway = itemView.findViewById(R.id.tvAway);
-//            nameHome = itemView.findViewById(R.id.tvHome);
             time = itemView.findViewById(R.id.tvTime);
             scoreHome = itemView.findViewById(R.id.tvScoreHome);
             scoreAway = itemView.findViewById(R.id.tvScoreAway);
             iconAway = itemView.findViewById(R.id.logoAway);
             iconHome = itemView.findViewById(R.id.logoHome);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Match match) {
-//            nameAway.setText(match.getLogoAway());
-//            nameHome.setText(match.getLogoHome());
             time.setText(match.getTime());
             scoreHome.setText(match.getScoreHome());
             scoreAway.setText(match.getScoreAway());
             checkIcon(match.getLogoHome(), iconHome);
             checkIcon(match.getLogoAway(), iconAway);
-
         }
 
         private void checkIcon(String icon, ImageView view) {
             switch (icon) {
-                case "Man City":
+                case "Man City ":
+                    System.out.println("Da vao mancity");
                     view.setImageResource(R.drawable.manchester_city);
                     break;
                 case "Chelsea":
                     view.setImageResource(R.drawable.chelsea);
+                    System.out.println("Da vao chelsea");
                     break;
                 case "Liverpool":
                     view.setImageResource(R.drawable.liverpool);
@@ -131,6 +135,13 @@ public class MatchMainAdapter extends RecyclerView.Adapter<MatchMainAdapter.View
                     break;
             }
         }
-
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION && listener != null) {
+                Match clickedMatch = itemList.get(position);
+                listener.onItemClick(clickedMatch);
+            }
+        }
     }
 }
