@@ -54,14 +54,14 @@ public class FragmentMain extends Fragment {
 
     CustomAdapterMatchMain adapter;
     String urlAllfeed = "https://supersport.com/apix/feed/v5/feed/web?type=article&entityTagId=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&top=12&skip=13&platform=web&region=za&exclusionEntityIds=";
-    String urlOldMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1699289999&endDate=1699894799&orderAscending=false&region=za&platform=indaleko-web";
+    String urlOldMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1701190799&endDate=1701795599&orderAscending=false&region=za&platform=indaleko-web";
     String urlNewMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=1,2&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1699808400&orderAscending=true&region=za&platform=indaleko-web";
     String urlNews = "https://footballnewsapi.netlify.app/.netlify/functions/api/news/onefootball";
     RequestQueue requestQueue;
 
     RecyclerView rclLst;
     ListView lvNewMatch, lvNews;
-    TextView btnSeeAllMatch;
+    TextView btnSeeAllMatch, btnSeeAllNews;
 
     boolean isDataLoaded = false;
     SharedViewModel sharedViewModel;
@@ -115,6 +115,7 @@ public class FragmentMain extends Fragment {
         lvNewMatch = view.findViewById(R.id.lstNewMatch);
         lvNews = view.findViewById(R.id.lvNews);
         btnSeeAllMatch = view.findViewById(R.id.btnSeeAllMatch);
+        btnSeeAllNews = view.findViewById(R.id.btnSeeAllNews);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         rclLst.setLayoutManager(layoutManager);
         adapter = new CustomAdapterMatchMain(matchList, new CustomAdapterMatchMain.OnItemClickListener() {
@@ -166,6 +167,13 @@ public class FragmentMain extends Fragment {
                     e.printStackTrace();
                     Toast.makeText(requireContext(), "Error opening browser", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnSeeAllNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new FragmentFullNews());
             }
         });
     }
