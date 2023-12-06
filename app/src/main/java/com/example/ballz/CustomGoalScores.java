@@ -5,23 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
-public class CustomTopScores extends ArrayAdapter {
+public class CustomGoalScores extends ArrayAdapter {
     Context context;
     int layoutItem;
 
-    ArrayList<TopScores> lsTopScores = new ArrayList<>();
+    ArrayList<GoalScores> lsTopScores = new ArrayList<>();
 
-    public CustomTopScores(@NonNull Context context, int resource, ArrayList<TopScores> lsTopScores) {
+    public CustomGoalScores(@NonNull Context context, int resource, ArrayList<GoalScores> lsTopScores) {
         super(context, resource, lsTopScores);
         this.context = context;
         this.layoutItem = resource;
@@ -30,7 +27,7 @@ public class CustomTopScores extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        TopScores topScores = lsTopScores.get(position);
+        GoalScores topScores = lsTopScores.get(position);
         if(convertView==null)
         {
             convertView= LayoutInflater.from(context).inflate(layoutItem,null);
@@ -41,10 +38,9 @@ public class CustomTopScores extends ArrayAdapter {
         TextView tvNamePlayer = (TextView) convertView.findViewById(R.id.tvNamePlayer);
         TextView tvBanThang = (TextView) convertView.findViewById(R.id.tvBanThang);
 
-        tvNumberOfNum.setText(topScores.getTeam_name()+".");
+        tvNumberOfNum.setText(topScores.getRank()+".");
         tvNamePlayer.setText(topScores.getPlayer_name());
-        tvBanThang.setText(String.valueOf(topScores.getGoals()));
+        tvBanThang.setText(String.valueOf(topScores.getGoal()));
         return convertView;
-
     }
 }
