@@ -27,6 +27,7 @@ public class Top_Scorer_List extends BaseAdapter {
         this.playerPositionList = playerPositionList;
         this.topGoalList = topGoalList;
         this.clubImgList = clubImgList;
+        this.playerPhotoList = playerPhotoList;
         inflater = LayoutInflater.from(ctx);
     }
 
