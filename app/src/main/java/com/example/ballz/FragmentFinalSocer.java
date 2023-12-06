@@ -249,24 +249,29 @@
 
                             // Check if the event has the "player" and "team" keys
                             if (event.has("player") && event.has("team")) {
-                                JSONObject player = event.getJSONObject("player");
-                                String playerName = player.getString("displayName");
+                                String eventType = event.getString("type");
 
-                                JSONObject time = event.getJSONObject("time");
-                                int minutes = time.getInt("minutes");
+                                // Check if the event type is "goal" or "penalty-goal"
+                                if ("goal".equals(eventType) || "penalty-goal".equals(eventType)) {
+                                    JSONObject player = event.getJSONObject("player");
+                                    String playerName = player.getString("displayName");
 
-                                // Get the teamId
-                                JSONObject team = event.getJSONObject("team");
-                                String teamId = team.getString("teamId");
+                                    JSONObject time = event.getJSONObject("time");
+                                    int minutes = time.getInt("minutes");
 
-                                // Create a key for the teamId if it doesn't exist
-                                teamGoalsMap.putIfAbsent(teamId, new ArrayList<>());
+                                    // Get the teamId
+                                    JSONObject team = event.getJSONObject("team");
+                                    String teamId = team.getString("teamId");
 
-                                // Fix: Include both minutes and seconds in the format string
-                                String formattedTime = String.format(Locale.getDefault(), "%02d", minutes);
+                                    // Create a key for the teamId if it doesn't exist
+                                    teamGoalsMap.putIfAbsent(teamId, new ArrayList<>());
 
-                                // Add the goal to the corresponding team in the map
-                                teamGoalsMap.get(teamId).add(playerName + " - " + formattedTime);
+                                    // Fix: Include both minutes and seconds in the format string
+                                    String formattedTime = String.format(Locale.getDefault(), "%02d", minutes);
+
+                                    // Add the goal to the corresponding team in the map
+                                    teamGoalsMap.get(teamId).add(playerName + " - " + formattedTime);
+                                }
                             }
                         }
 
@@ -305,7 +310,7 @@
                             View separator = new View(getContext());
                             separator.setLayoutParams(new ViewGroup.LayoutParams(
                                     520, // Width of the separator line
-                                    ViewGroup.LayoutParams.MATCH_PARENT   ));
+                                    ViewGroup.LayoutParams.MATCH_PARENT));
                             teamContainer.addView(separator);
                         }
 

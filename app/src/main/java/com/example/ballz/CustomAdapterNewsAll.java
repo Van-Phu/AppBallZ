@@ -16,12 +16,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class CustomAdapterNews extends ArrayAdapter {
+public class CustomAdapterNewsAll extends ArrayAdapter {
     Context context;
     int layoutItem;
     ArrayList<News> lstNews = new ArrayList<>();
 
-    public CustomAdapterNews(@NonNull Context context, int resource, ArrayList<News> lstNews) {
+    public CustomAdapterNewsAll(@NonNull Context context, int resource, ArrayList<News> lstNews) {
         super(context, resource, lstNews);
         this.context = context;
         this.layoutItem = resource;
@@ -33,13 +33,12 @@ public class CustomAdapterNews extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         News news = (News) getItem(position);
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_layout_news_main, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_layout_news, parent, false);
         }
-        ImageView imageNews = convertView.findViewById(R.id.imageAvatar);
+        ImageView imageNews = convertView.findViewById(R.id.imgBackground);
         Picasso.get().load(news.getImage()).resize(100, 100).into(imageNews);
         TextView title = convertView.findViewById(R.id.tvTitle);
         title.setText(news.getTitle());
-//        Log.d("ImageUrl", news.getUrlNews());
         return convertView;
     }
 }

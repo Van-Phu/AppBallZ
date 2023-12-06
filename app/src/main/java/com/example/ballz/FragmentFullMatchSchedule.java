@@ -4,10 +4,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -81,12 +86,18 @@ public class FragmentFullMatchSchedule extends Fragment {
         requestQueue = Volley.newRequestQueue(requireContext());
     }
 
+    EditText edtSearch;
+    Button btnSearch;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_full_match_schedule, container, false);
         lvMatch = view.findViewById(R.id.lvMatch);
+        edtSearch = (EditText) view.findViewById(R.id.edtSearch);
+        btnSearch = (Button) view.findViewById(R.id.btnSearch);
         loadNewMatch();
+        addEvents();
         return  view;
     }
 
@@ -103,6 +114,8 @@ public class FragmentFullMatchSchedule extends Fragment {
             return "";
         }
     }
+
+
 
     private void loadNewMatch(){
         com.android.volley.toolbox.StringRequest request = new StringRequest(Request.Method.GET, urlNewMatch, new Response.Listener<String>() {
@@ -150,4 +163,41 @@ public class FragmentFullMatchSchedule extends Fragment {
         });
         requestQueue.add(request);
     }
+
+    private void addEvents(){
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String result = edtSearch.getText().toString();
+                searchClub(result);
+            }
+        });
+        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                String result = edtSearch.getText().toString();
+                searchClub(result);
+                return true;
+            }
+        });
+    }
+
+    private void searchClub(String clubName) {
+        List<NewMatch> filteredMatches = new ArrayList<>();
+        String lowercaseClubName = clubName.toLowerCase();
+
+        for (NewMatch match : newMatchList) {
+            String lowercaseHomeName = match.getNameHome().toLowerCase();
+            String lowercaseAwayName = match.getNameAway().toLowerCase();
+            if (lowercaseHomeName.contains(lowercaseClubName) || lowercaseAwayName.contains(lowercaseClubName)) {
+                filteredMatches.add(match);
+            }
+        }
+        CustomAdapterNewMatchMain newMatchMainAdapter = new CustomAdapterNewMatchMain(requireContext(), R.layout.new_match_table_layout_custom, (ArrayList<NewMatch>) filteredMatches);
+        lvMatch.setAdapter(newMatchMainAdapter);
+    }
+
+
+
+
 }
