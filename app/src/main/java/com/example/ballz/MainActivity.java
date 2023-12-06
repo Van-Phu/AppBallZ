@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new FragmentMain());
                         return true;
                     case R.id.page_2:
+                        loadFragment(new FragmentTopScorer());
                         return true;
                     case R.id.page_3:
                         loadFragment(new FragmentStandings());
