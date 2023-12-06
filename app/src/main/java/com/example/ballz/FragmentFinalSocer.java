@@ -252,9 +252,9 @@
                                 String eventType = event.getString("type");
 
                                 // Check if the event type is "goal" or "penalty-goal"
-                                if ("goal".equals(eventType) || "penalty-goal".equals(eventType)) {
+                                if ("goal".equals(eventType) || "penalty-goal".equals(eventType)||"own-goal".equals(eventType)) {
                                     JSONObject player = event.getJSONObject("player");
-                                    String playerName = player.getString("displayName");
+                                    String playerName = player.getString("shortName");
 
                                     JSONObject time = event.getJSONObject("time");
                                     int minutes = time.getInt("minutes");
@@ -275,7 +275,7 @@
                             }
                         }
 
-                        // Assuming parentContainer is a ViewGroup (e.g., LinearLayout) in your layout
+                        // Assuming teamContainer is a LinearLayout in your layout
                         teamContainer.removeAllViews(); // Clear existing views
 
                         for (Map.Entry<String, List<String>> entry : teamGoalsMap.entrySet()) {
@@ -293,10 +293,10 @@
                             // Add the team ID TextView to the team layout
                             teamLayout.addView(teamIdTextView);
 
-                            for (String goalInfo : teamGoals) {
+                            for (int j = teamGoals.size() - 1; j >= 0; j--) {
                                 // Create a new TextView for each goal
                                 TextView goalTextView = new TextView(getContext());
-                                goalTextView.setText(goalInfo);
+                                goalTextView.setText(teamGoals.get(j));
                                 goalTextView.setTextColor(Color.WHITE);
 
                                 // Add the goal TextView to the team layout
@@ -326,7 +326,6 @@
             });
             requestQueue.add(request);
         }
-
 
         private void checkIcon(String icon, ImageView view) {
             switch (icon) {
