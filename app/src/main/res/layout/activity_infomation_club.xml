@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfomationClub"
+    tools:context=".View.InfomationClub"
     android:background="#181928"
     android:id="@+id/fragInfomationClub"
     >
@@ -114,7 +114,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="25dp"
-                    android:background="##222232" />
+                    android:background="#222232" />
 
             </LinearLayout>
 
@@ -148,7 +148,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="25dp"
-                    android:background="##222232" />
+                    android:background="#222232" />
 
             </LinearLayout>
 
@@ -182,7 +182,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="25dp"
-                    android:background="##222232" />
+                    android:background="#222232" />
 
             </LinearLayout>
 
