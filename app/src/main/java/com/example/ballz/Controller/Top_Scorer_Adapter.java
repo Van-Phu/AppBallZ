@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class Top_Scorer_List extends BaseAdapter {
+public class Top_Scorer_Adapter extends BaseAdapter {
     Context context;
     ArrayList<String> playerNameList;
     ArrayList<String> playerPositionList;
@@ -22,7 +22,7 @@ public class Top_Scorer_List extends BaseAdapter {
     ArrayList<String> clubImgList;
     LayoutInflater inflater;
 
-    public Top_Scorer_List(Context ctx, ArrayList<String> playerNameList, ArrayList<String> playerPositionList, ArrayList<String> topGoalList, ArrayList<String> clubImgList, ArrayList<String> playerPhotoList) {
+    public Top_Scorer_Adapter(Context ctx, ArrayList<String> playerNameList, ArrayList<String> playerPositionList, ArrayList<String> topGoalList, ArrayList<String> clubImgList, ArrayList<String> playerPhotoList) {
         this.context = ctx;
         this.playerNameList = playerNameList;
         this.playerPositionList = playerPositionList;
