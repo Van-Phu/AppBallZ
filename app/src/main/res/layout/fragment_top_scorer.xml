@@ -9,15 +9,6 @@
 
     >
 
-    <ImageView
-        android:id="@+id/imgGetBack"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/left_arrow"
-        />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -26,13 +17,12 @@
         android:layout_marginTop="28dp"
         android:text="Top Scorers"
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        />
+        android:textSize="30sp" />
 
     <ListView
         android:id="@+id/lvPlayerStatistic"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp" />
+        android:layout_height="650dp"
+        android:layout_marginTop="80dp" />
 
 </FrameLayout>
