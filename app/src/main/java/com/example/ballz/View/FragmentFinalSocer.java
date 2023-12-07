@@ -38,11 +38,6 @@
     import java.util.Map;
     import java.util.TimeZone;
 
-    /**
-     * A simple {@link Fragment} subclass.
-     * Use the {@link TestFragment#newInstance} factory method to
-     * create an instance of this fragment.
-     */
     public class FragmentFinalSocer extends Fragment {
 
         // TODO: Rename parameter arguments, choose names that match
@@ -166,19 +161,11 @@
                     tvAS.setText(scoreAway);
                     loadInforScore(urlMatch);
                     loadInfornScore(urlMatch);
-
-
                 }
             });
-
-
             return view;
 
         }
-
-
-
-
         private void loadInforScore(String url) {
             StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 public void onResponse(String response) {
@@ -326,12 +313,10 @@
         private void checkIcon(String icon, ImageView view) {
             switch (icon) {
                 case "Man City ":
-                    System.out.println("Da vao mancity");
                     view.setImageResource(R.drawable.manchester_city);
                     break;
                 case "Chelsea":
                     view.setImageResource(R.drawable.chelsea);
-                    System.out.println("Da vao chelsea");
                     break;
                 case "Liverpool":
                     view.setImageResource(R.drawable.liverpool);

@@ -1,6 +1,7 @@
 package com.example.ballz.Controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.example.ballz.Model.ClubStanding;
 import com.example.ballz.R;
+import com.example.ballz.View.FragmentSquad;
 
 import java.util.ArrayList;
 
@@ -53,6 +55,7 @@ public class CustomAdaperTableStandings extends ArrayAdapter {
         tvDrawNum.setText(clubStanding.getDrawNumb());
         tvLoseNum.setText(clubStanding.getLoseNumb());
         tvPoint.setText(clubStanding.getPoint());
+
 
         return convertView;
 

@@ -15,9 +15,6 @@
         android:theme="@style/Theme.BallZ"
         tools:targetApi="31">
         <activity
-            android:name=".View.InfomationClub"
-            android:exported="false" />
-        <activity
             android:name=".View.MainActivity"
             android:exported="true">
             <intent-filter>

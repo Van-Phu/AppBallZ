@@ -55,7 +55,6 @@ public class FragmentStandings extends Fragment {
     ArrayList<GoalScores> arrayListGoalScores = new ArrayList<>();
     ListView lvTableStangdings, lvTopScorers;
     CustomGoalScores adapterTopScores;
-
     CustomAdaperTableStandings adapterTableStandings;
     RequestQueue requestQueue;
     TextView tvSeeAllStandingTable, tvAllTopScoresPlayer;
@@ -210,18 +209,6 @@ public class FragmentStandings extends Fragment {
         });
 
         requestQueue.add(request1);
-        lvTableStangdings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
-        lvTopScorers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
         return view;
     }
     public void loadFragment(Fragment fragment){

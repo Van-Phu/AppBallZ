@@ -139,16 +139,6 @@ public class FragmentFullMatchSchedule extends Fragment {
                         String formattedTime = formatTime(time, outputFormat);
                         String nameHome = homeTeam.getString("shortName");
                         String nameAway = awayTeam.getString("shortName");
-
-//
-                        System.out.println(eventId);
-
-                        System.out.println(formattedTime);
-                        System.out.println(nameHome);
-                        System.out.println(nameAway);
-                        System.out.println(logoHome);
-                        System.out.println(logoAway);
-
                         NewMatch newMatch = new NewMatch(eventId, formattedTime,nameHome, nameAway, logoHome, logoAway);
                         newMatchList.add(newMatch);
                     }

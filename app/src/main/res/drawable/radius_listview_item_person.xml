@@ -1,5 +1,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners android:radius="8dp" /> <!-- Điều chỉnh bán kính để bo góc -->
-    <solid android:color="#36364A" /> <!-- Màu nền của hình dạng -->
+    <solid android:color="#303041" /> <!-- Màu nền của hình dạng -->
 </shape>

@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,39 +12,27 @@
         android:orientation="horizontal"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:layout_margin="10dp"
-
-        >
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <LinearLayout
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_marginLeft="20dp"
-           >
-
+            android:gravity="center"
+            android:background="@drawable/radius_item_person"
+            android:orientation="vertical">
             <ImageView
-                android:id="@+id/imgClub1"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/radius_item_person" />
-
-            <ImageView
-                android:id="@+id/imgClub"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/person" />
-        </RelativeLayout>
+                android:id="@+id/imgCoach"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="1dp"
+                android:layout_gravity="center" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:orientation="horizontal"
             android:paddingLeft="10dp">
-
-
             <TextView
                 android:id="@+id/tvNameCoach"
                 android:layout_width="match_parent"
@@ -54,10 +40,9 @@
                 android:layout_gravity="center"
                 android:text="NameCoach"
                 android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
-
         </LinearLayout>
 
     </LinearLayout>
