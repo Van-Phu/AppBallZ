@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#181928"
-    tools:context=".FragmentAllGoalScores">
+    tools:context=".View.FragmentAllGoalScores">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
