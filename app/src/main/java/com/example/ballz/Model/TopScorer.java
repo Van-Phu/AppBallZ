@@ -6,7 +6,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ballz.R;
-import com.example.ballz.Controller.Top_Scorer_List;
+import com.example.ballz.Controller.Top_Scorer_Adapter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -126,7 +126,7 @@ public class TopScorer extends AppCompatActivity {
 
             lvPlayerStatistic = findViewById(R.id.lvPlayerStatistic);
 
-            Top_Scorer_List football_player_list = new Top_Scorer_List(getApplicationContext(), playerNameList, playerPositionList, topGoalList, clubImgList, playerPhotoList);
+            Top_Scorer_Adapter football_player_list = new Top_Scorer_Adapter(getApplicationContext(), playerNameList, playerPositionList, topGoalList, clubImgList, playerPhotoList);
             lvPlayerStatistic.setAdapter(football_player_list);
 
         } catch (JsonProcessingException e) {

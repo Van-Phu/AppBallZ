@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.ballz.R;
-import com.example.ballz.Controller.Top_Scorer_List;
+import com.example.ballz.Controller.Top_Scorer_Adapter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -110,12 +110,6 @@ public class FragmentTopScorer extends Fragment {
 
         parseJsonData(view);
 
-        imgGetBack = view.findViewById(R.id.imgGetBack);
-
-        imgGetBack.setOnClickListener(v -> {
-            loadFragment(new FragmentMain());
-        });
-
         return view;
     }
 
@@ -189,7 +183,7 @@ public class FragmentTopScorer extends Fragment {
 
             lvPlayerStatistic = view.findViewById(R.id.lvPlayerStatistic);
 
-            Top_Scorer_List football_player_list = new Top_Scorer_List(getActivity(), playerNameList, playerPositionList, topGoalList, clubImgList, playerPhotoList);
+            Top_Scorer_Adapter football_player_list = new Top_Scorer_Adapter(getActivity(), playerNameList, playerPositionList, topGoalList, clubImgList, playerPhotoList);
             lvPlayerStatistic.setAdapter(football_player_list);
 
         } catch (JsonProcessingException e) {
