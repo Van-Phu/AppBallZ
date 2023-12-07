@@ -205,7 +205,6 @@ public class FragmentMain extends Fragment {
                             int scoreAway = matchObject.getJSONObject("score").getJSONObject("total").getInt("away");
                             Match match = new Match(logoAway, logoHome, formattedTime, String.valueOf(scoreHome), String.valueOf(scoreAway), idFeed);
                             matchList.add(match);
-                            System.out.println(idFeed);
                         }
                         adapter.notifyDataSetChanged();
 
@@ -282,7 +281,6 @@ public class FragmentMain extends Fragment {
                     e.printStackTrace();
                 }
                 CustomAdapterNews adapterNews = new CustomAdapterNews(siblingContext, R.layout.custom_layout_news_main, (ArrayList<News>) newsList);
-                System.out.println(newsList);
                 lvNews.setAdapter(adapterNews);
             }
         }, new Response.ErrorListener() {

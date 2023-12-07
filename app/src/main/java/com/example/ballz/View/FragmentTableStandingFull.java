@@ -104,7 +104,6 @@ public class FragmentTableStandingFull extends Fragment {
                                 JSONObject clubStandingJson = teams.getJSONObject(k);
                                 JSONObject team = clubStandingJson.getJSONObject("team");
                                 JSONObject logs = clubStandingJson.getJSONObject("logs");
-//                                System.out.println(team);
                                 String img = team.getString("icon");
                                 String nameClub = team.getString("name");
                                 String winNumb = logs.getString("wins");
@@ -140,9 +139,19 @@ public class FragmentTableStandingFull extends Fragment {
         lvTableStangdings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ClubStanding clubStanding = clubStandingArrayList.get(position);
+
+                FragmentSquad fragmentSquad = FragmentSquad.newInstance(clubStanding.getNameClub());
+
+                if (getActivity() != null) {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragStangding, fragmentSquad)
+                            .addToBackStack(null)
+                            .commit();
+                }
             }
         });
-
         return view;
     }
 }
