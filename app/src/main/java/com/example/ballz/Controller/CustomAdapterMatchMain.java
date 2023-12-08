@@ -92,10 +92,10 @@ public class CustomAdapterMatchMain extends RecyclerView.Adapter<CustomAdapterMa
                 case "Forest":
                     view.setImageResource(R.drawable.nottingham);
                     break;
-                case "Aston Villla":
+                case "Aston Villa":
                     view.setImageResource(R.drawable.astonvilla);
                     break;
-                case "Fullham":
+                case "Fulham":
                     view.setImageResource(R.drawable.fulham);
                     break;
                 case "Brighton":

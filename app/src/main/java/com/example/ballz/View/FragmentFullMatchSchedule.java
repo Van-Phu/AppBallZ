@@ -3,11 +3,14 @@ package com.example.ballz.View;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -134,7 +137,7 @@ public class FragmentFullMatchSchedule extends Fragment {
                         String logoHome = homeTeam.getString("shortName");
                         String logoAway = awayTeam.getString("shortName");
                         String time = matchObject.getString("eventDateStart");
-                        String eventId = matchObject.getString("eventId");
+                        String eventId = matchObject.getString("feedId");
                         String outputFormat = "dd/MM/yyyy HH:mm:ss";
                         String formattedTime = formatTime(time, outputFormat);
                         String nameHome = homeTeam.getString("shortName");
@@ -173,6 +176,26 @@ public class FragmentFullMatchSchedule extends Fragment {
                 return true;
             }
         });
+
+        lvMatch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                NewMatch selectedItem = (NewMatch) adapterView.getItemAtPosition(i);
+                String feedId = String.valueOf(selectedItem.getId());
+                Bundle bundle = new Bundle();
+                bundle.putString("feedID", feedId);
+                FragmentManager fm = getParentFragmentManager();
+                fm.setFragmentResult("keyMain", bundle);
+                loadFragment(new FragmentHistoryFighting());
+            }
+        });
+    }
+
+    public void loadFragment(Fragment fragment){
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragMain, fragment);
+        fragmentTransaction.commit();
     }
 
     private void searchClub(String clubName) {

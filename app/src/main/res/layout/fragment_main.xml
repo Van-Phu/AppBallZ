@@ -33,7 +33,7 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="BALLZ"
+                    android:text="FootballFever"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="25dp"

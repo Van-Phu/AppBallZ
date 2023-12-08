@@ -51,8 +51,6 @@
         private ArrayList<String> goalInfoList = new ArrayList<>();
         RequestQueue requestQueue;
 
-//        private String urlFinalScore;
-
         String urlFinalScore = "https://supersport.com/apix/football/v5/matches/a099b475-8114-4c8b-96a0-0211c5454b2d/events-and-stats";
         String urlStart = "https://supersport.com/apix/football/v5/matches/";
         String urlEnd = "/events-and-stats";

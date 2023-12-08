@@ -60,7 +60,7 @@ public class FragmentMain extends Fragment {
 
     CustomAdapterMatchMain adapter;
     String urlAllfeed = "https://supersport.com/apix/feed/v5/feed/web?type=article&entityTagId=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&top=12&skip=13&platform=web&region=za&exclusionEntityIds=";
-    String urlOldMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1701190799&endDate=1701795599&orderAscending=false&region=za&platform=indaleko-web";
+    String urlOldMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1701363599&endDate=1701968399&orderAscending=false&region=za&platform=indaleko-web";
     String urlNewMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=1,2&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1699808400&orderAscending=true&region=za&platform=indaleko-web";
     String urlNews = "https://footballnewsapi.netlify.app/.netlify/functions/api/news/onefootball";
     RequestQueue requestQueue;
@@ -140,6 +140,8 @@ public class FragmentMain extends Fragment {
                 loadFragment(new FragmentFinalSocer());
             }
         });
+
+
         rclLst.setAdapter(adapter);
         addEvents();
         return view;
@@ -173,6 +175,19 @@ public class FragmentMain extends Fragment {
                     e.printStackTrace();
                     Toast.makeText(requireContext(), "Error opening browser", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        lvNewMatch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                NewMatch selectedItem = (NewMatch) adapterView.getItemAtPosition(i);
+                String feedId = String.valueOf(selectedItem.getId());
+                Bundle bundle = new Bundle();
+                bundle.putString("feedID", feedId);
+                FragmentManager fm = getParentFragmentManager();
+                fm.setFragmentResult("keyMain", bundle);
+                loadFragment(new FragmentHistoryFighting());
             }
         });
 
@@ -237,7 +252,7 @@ public class FragmentMain extends Fragment {
                         String logoHome = homeTeam.getString("shortName");
                         String logoAway = awayTeam.getString("shortName");
                         String time = matchObject.getString("eventDateStart");
-                        String eventId = matchObject.getString("eventId");
+                        String eventId = matchObject.getString("feedId");
                         String outputFormat = "dd/MM/yyyy HH:mm:ss";
                         String formattedTime = formatTime(time, outputFormat);
                         String nameHome = homeTeam.getString("shortName");
@@ -245,6 +260,7 @@ public class FragmentMain extends Fragment {
                         NewMatch newMatch = new NewMatch(eventId, formattedTime,nameHome, nameAway, logoHome, logoAway);
                         newMatchList.add(newMatch);
                     }
+
                     adapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
