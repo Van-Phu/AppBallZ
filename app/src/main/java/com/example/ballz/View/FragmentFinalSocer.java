@@ -49,6 +49,8 @@
         private String mParam1;
         private String mParam2;
         private ArrayList<String> goalInfoList = new ArrayList<>();
+        List<String> homeGoal = new ArrayList<>();
+        List<String> awayGoal = new ArrayList<>();
         RequestQueue requestQueue;
 
         String urlFinalScore = "https://supersport.com/apix/football/v5/matches/a099b475-8114-4c8b-96a0-0211c5454b2d/events-and-stats";
@@ -57,7 +59,7 @@
         String urlScore = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1699289999&endDate=1699894799&orderAscending=false&region=za&platform=indaleko-web";
         TextView tvHS, tvAS, tvHShots, tvAShots, tvHsot, tvAsot, tvHcorner,
                 tvAcorner, tvHoffsides, tvAoffsides, tvHcs, tvAcs, tvHblp, tvAblp,
-                tvHylc, tvAylc, tvHrc, tvArc, tvHtp, tvAtp, tvHbls, tvAbls, goalsTextView;
+                tvHylc, tvAylc, tvHrc, tvArc, tvHtp, tvAtp, tvHbls, tvAbls, goalsTextView, tvPlayerScoredHome, tvPlayerScoredAway;
         ImageView homeLogo, awayLogo;
         ImageView btnBack;
         LinearLayout teamContainer;
@@ -143,8 +145,10 @@
             tvAbls = view.findViewById(R.id.tvAbls);
             goalsTextView = view.findViewById(R.id.tv);
             teamContainer = view.findViewById(R.id.teamContainer);
-            homeLogo = view.findViewById(R.id.imageView2);
-            awayLogo = view.findViewById(R.id.imageView);
+            homeLogo = view.findViewById(R.id.imageView);
+            awayLogo = view.findViewById(R.id.imageView2);
+            tvPlayerScoredHome = view.findViewById(R.id.tvPlayerScoredHome);
+            tvPlayerScoredAway = view.findViewById(R.id.tvPlayerScoredAway);
 
 
             FragmentManager fm = getParentFragmentManager();
@@ -154,7 +158,7 @@
                     rs = result.getString("result");
                     scoreHome = result.getString("home");
                     scoreAway = result.getString("away");
-                    urlMatch += urlStart + rs + urlEnd;
+                    urlMatch += "https://supersport.com/apix/football/v5/matches/" + rs +"/events-and-stats";
                     tvHS.setText(scoreHome);
                     tvAS.setText(scoreAway);
                     loadInforScore(urlMatch);
@@ -162,7 +166,6 @@
                 }
             });
             return view;
-
         }
         private void loadInforScore(String url) {
             StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -180,13 +183,8 @@
                         String logoAway = awayTeam.getString("shortName");
                         checkIcon(logoHome,homeLogo);
                         checkIcon(logoAway,awayLogo);
-
-// to
-
-                        // Retrieve and set various statistics
                         setStatistics(homeValues, tvHShots, tvHsot, tvHcorner, tvHoffsides, tvHcs, tvHblp, tvHylc, tvHrc, tvHtp, tvHbls);
                         setStatistics(awayValues, tvAShots, tvAsot, tvAcorner, tvAoffsides, tvAcs, tvAblp, tvAylc, tvArc, tvAtp, tvAbls);
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -222,81 +220,79 @@
                         JSONObject jsonResponse = new JSONObject(response);
                         JSONArray eventsArray = jsonResponse.getJSONArray("events");
 
-                        // Map to store goals based on teamId
                         Map<String, List<String>> teamGoalsMap = new HashMap<>();
-
                         for (int i = 0; i < eventsArray.length(); i++) {
                             JSONObject event = eventsArray.getJSONObject(i);
-
-                            // Check if the event has the "player" and "team" keys
                             if (event.has("player") && event.has("team")) {
                                 String eventType = event.getString("type");
-
-                                // Check if the event type is "goal" or "penalty-goal"
                                 if ("goal".equals(eventType) || "penalty-goal".equals(eventType)||"own-goal".equals(eventType)) {
                                     JSONObject player = event.getJSONObject("player");
                                     String playerName = player.getString("shortName");
-
                                     JSONObject time = event.getJSONObject("time");
                                     int minutes = time.getInt("minutes");
-
-                                    // Get the teamId
                                     JSONObject team = event.getJSONObject("team");
+                                    String side = event.getString("side");
                                     String teamId = team.getString("teamId");
-
-                                    // Create a key for the teamId if it doesn't exist
                                     teamGoalsMap.putIfAbsent(teamId, new ArrayList<>());
-
-                                    // Fix: Include both minutes and seconds in the format string
                                     String formattedTime = String.format(Locale.getDefault(), "%02d", minutes);
-
-                                    // Add the goal to the corresponding team in the map
                                     teamGoalsMap.get(teamId).add(playerName + " - " + formattedTime);
+                                    if(side.equals("home")){
+                                        System.out.println("h");
+                                        homeGoal.add(playerName + " - " + formattedTime);
+                                    }else if(side.equals("away")){
+                                        System.out.println("h");
+                                        awayGoal.add(playerName + " - " + formattedTime);
+                                    }
                                 }
                             }
                         }
+//
+//                        System.out.println("h" + homeGoal);
+//                        System.out.println("a" + awayGoal);
 
-                        // Assuming teamContainer is a LinearLayout in your layout
-                        teamContainer.removeAllViews(); // Clear existing views
+                        String homeScored = "";
+                        String awayScored = "";
 
-                        for (Map.Entry<String, List<String>> entry : teamGoalsMap.entrySet()) {
-                            String currentTeamId = entry.getKey();
-                            List<String> teamGoals = entry.getValue();
-
-                            // Create a LinearLayout for each team
-                            LinearLayout teamLayout = new LinearLayout(getContext());
-                            teamLayout.setOrientation(LinearLayout.VERTICAL);
-
-                            // Create a new TextView for the team ID
-                            TextView teamIdTextView = new TextView(getContext());
-                            teamIdTextView.setTextColor(Color.WHITE);
-
-                            // Add the team ID TextView to the team layout
-                            teamLayout.addView(teamIdTextView);
-
-                            for (int j = teamGoals.size() - 1; j >= 0; j--) {
-                                // Create a new TextView for each goal
-                                TextView goalTextView = new TextView(getContext());
-                                goalTextView.setText(teamGoals.get(j));
-                                goalTextView.setTextColor(Color.WHITE);
-
-                                // Add the goal TextView to the team layout
-                                teamLayout.addView(goalTextView);
-                            }
-
-                            // Add the team layout to the parent container
-                            teamContainer.addView(teamLayout);
-
-                            // Add a separator line between teams
-                            View separator = new View(getContext());
-                            separator.setLayoutParams(new ViewGroup.LayoutParams(
-                                    520, // Width of the separator line
-                                    ViewGroup.LayoutParams.MATCH_PARENT));
-                            teamContainer.addView(separator);
+                        for(String h : homeGoal){
+                            homeScored += h +"\n";
+                        }
+                        for(String h : awayGoal){
+                            awayScored += h +"\n";
                         }
 
+                        System.out.println(homeScored);
+                        System.out.println(awayScored);
+                        tvPlayerScoredHome.setText(homeScored);
+                        tvPlayerScoredAway.setText(awayScored);
+
+
+//                        teamContainer.removeAllViews();
+//                        for (Map.Entry<String, List<String>> entry : teamGoalsMap.entrySet()) {
+//                            String currentTeamId = entry.getKey();
+//                            List<String> teamGoals = entry.getValue();
+//                            LinearLayout teamLayout = new LinearLayout(getContext());
+//                            teamLayout.setOrientation(LinearLayout.VERTICAL);
+//                            TextView teamIdTextView = new TextView(getContext());
+//                            teamIdTextView.setTextColor(Color.WHITE);
+//                            teamLayout.addView(teamIdTextView);
+//
+//                            for (int j = teamGoals.size() - 1; j >= 0; j--) {
+//                                TextView goalTextView = new TextView(getContext());
+//                                goalTextView.setText(teamGoals.get(j));
+//                                goalTextView.setTextColor(Color.WHITE);
+//                                teamLayout.addView(goalTextView);
+//                            }
+//
+//                            teamContainer.addView(teamLayout);
+//                            View separator = new View(getContext());
+//                            separator.setLayoutParams(new ViewGroup.LayoutParams(
+//                                    520,
+//                                    ViewGroup.LayoutParams.MATCH_PARENT));
+//                            teamContainer.addView(separator);
+//                        }
+
                     } catch (JSONException e) {
-                        e.printStackTrace(); // Handle the exception in a more appropriate way, e.g., log it
+                        e.printStackTrace();
                     }
                 }
             }, new Response.ErrorListener() {
@@ -328,10 +324,10 @@
                 case "Forest":
                     view.setImageResource(R.drawable.nottingham);
                     break;
-                case "Aston Villla":
+                case "Aston Villa":
                     view.setImageResource(R.drawable.astonvilla);
                     break;
-                case "Fullham":
+                case "Fulham":
                     view.setImageResource(R.drawable.fulham);
                     break;
                 case "Brighton":
