@@ -60,7 +60,7 @@ public class FragmentMain extends Fragment {
 
     CustomAdapterMatchMain adapter;
     String urlAllfeed = "https://supersport.com/apix/feed/v5/feed/web?type=article&entityTagId=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&top=12&skip=13&platform=web&region=za&exclusionEntityIds=";
-    String urlOldMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1701363599&endDate=1701968399&orderAscending=false&region=za&platform=indaleko-web";
+    String urlOldMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=3&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1701536399&endDate=1702141199&orderAscending=false&region=za&platform=indaleko-web";
     String urlNewMatch = "https://supersport.com/apix/football/v5.1/feed/score/summary?top=25&eventStatusIds=1,2&entityTagIds=c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6&startDate=1699808400&orderAscending=true&region=za&platform=indaleko-web";
     String urlNews = "https://footballnewsapi.netlify.app/.netlify/functions/api/news/onefootball";
     RequestQueue requestQueue;

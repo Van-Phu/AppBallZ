@@ -51,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.page_3:
                         loadFragment(new FragmentStandings());
                         return true;
-                    case R.id.page_4:
-                        loadFragment(new FragmentTableStandingFull());
-                        return true;
                 }
                 return true;
             }
