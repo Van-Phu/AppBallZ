@@ -140,9 +140,7 @@ public class FragmentTableStandingFull extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ClubStanding clubStanding = clubStandingArrayList.get(position);
-
                 FragmentSquad fragmentSquad = FragmentSquad.newInstance(clubStanding.getNameClub());
-
                 if (getActivity() != null) {
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
