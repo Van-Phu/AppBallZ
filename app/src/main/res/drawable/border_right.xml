@@ -1,0 +1,15 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#FFFFFF" /> <!-- Màu nền của LinearLayout -->
+        </shape>
+    </item>
+    <item
+        android:right="1dp"
+        android:left="-2dp"
+        >
+        <shape>
+            <solid android:color="#222232" /> <!-- Màu của đường viền -->
+        </shape>
+    </item>
+</layer-list>

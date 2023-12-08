@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#181928"
+    tools:context=".View.FragmentInfoCoach">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Infomation Coach"
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:padding="20dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/radius_tablestandings">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+                <LinearLayout
+                    android:id="@+id/lnBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/radius_listview_item_person"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/imgAvatarCoachInfo"
+                            android:layout_width="75dp"
+                            android:layout_height="75dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+                        <TextView
+                            android:id="@+id/tvNameCoachInfoClub"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TextView"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imgClubCoachInfo"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/arsenal" />
+
+                            <TextView
+                                android:id="@+id/tvNameClubInfoCoach"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="7dp"
+                                android:text="TextView"
+                                android:textColor="@color/white"
+                                android:textSize="15dp"
+                                tools:ignore="TextSizeCheck" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="85dp"
+                    android:background="#222232"
+                    android:orientation="horizontal"
+                    android:paddingTop="15dp"
+                    android:weightSum="2">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="15dp">
+
+                        <TextView
+                            android:id="@+id/tvAgeCoach"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="100 tuổi"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/white"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvBirthdayCoach"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="08/08/2028"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="13dp"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/textView29"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Quốc gia"
+                            android:textColor="@color/purple_200" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tvCountryCoachInfo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Mỹ tho"
+                                android:textColor="@color/white"
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                tools:ignore="TextSizeCheck" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/border_detail_person">
+                <TextView
+                    android:id="@+id/tvNameClubCoach2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Manchester City"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    tools:ignore="TextSizeCheck" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="0.5dp"
+                    android:background="#222232"
+                    android:weightSum="3"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="@drawable/border_right">
+
+                        <TextView
+                            android:id="@+id/tvNumMatchInfoCoach"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/textView30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Trận đấu"
+                            android:textColor="@color/purple_200"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:paddingLeft="30dp">
+
+                            <TextView
+                                android:id="@+id/textView34"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:text="Thắng"
+                                android:textColor="@color/white"
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                tools:ignore="TextSizeCheck" />
+
+                            <TextView
+                                android:id="@+id/textView35"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:text="Hòa"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="3dp"
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                tools:ignore="TextSizeCheck" />
+
+                            <TextView
+                                android:id="@+id/textView33"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:text="Bại"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="3dp"
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                tools:ignore="TextSizeCheck" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingRight="15dp"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:background="@drawable/border_right"
+                            >
+
+                            <TextView
+                                android:id="@+id/tvWinCoach"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:text="200"
+                                android:textColor="@color/white"
+                                android:textSize="15dp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <TextView
+                                android:id="@+id/tvDrawCoach"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:text="200"
+                                android:layout_marginTop="3dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp"
+                                tools:ignore="TextSizeCheck" />
+
+                            <TextView
+                                android:id="@+id/tvLoseCoach"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:text="12"
+                                android:layout_marginTop="3dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp"
+                                tools:ignore="TextSizeCheck" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Tỷ lệ thắng"
+                                android:textColor="@color/white"
+                                android:textSize="15dp"/>
+                            <TextView
+                                android:id="@+id/tvPercentage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="133"
+                                android:textColor="@color/white"
+                                android:textSize="25dp"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

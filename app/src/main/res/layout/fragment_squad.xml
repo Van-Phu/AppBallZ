@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#181928"
+    android:id="@+id/FragmentSquad"
     tools:context=".View.FragmentSquad">
     <!-- TODO: Update blank fragment layout -->
         <LinearLayout

@@ -3,11 +3,14 @@ package com.example.ballz.View;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ballz.Controller.CustomAdapterCoach;
 import com.example.ballz.Controller.CustomAdapterPlayer;
+import com.example.ballz.Model.ClubStanding;
 import com.example.ballz.Model.Coach;
 import com.example.ballz.Model.Player;
 import com.example.ballz.R;
@@ -176,9 +180,37 @@ public class FragmentSquad extends Fragment {
             }
         });
         requestQueue.add(request);
+        lvCoach.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Coach coach = arrayListCoach.get(position);
+                FragmentInfoCoach fragmentInfoCoach = FragmentInfoCoach.newInstance(coach.getId());
+                if (getActivity() != null) {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.FragmentSquad, fragmentInfoCoach)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            }
+        });
+
+        lvPlayer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Player player = arrayListPlayer.get(position);
+                FragmentPlayer fragmentPlayer = FragmentPlayer.newInstance(player.getIdPlayer());
+                if (getActivity() != null) {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.FragmentSquad, fragmentPlayer)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            }
+        });
         return view;
     }
-
     private void checkIcon(String icon, ImageView view) {
         switch (icon) {
             case "Manchester City":
