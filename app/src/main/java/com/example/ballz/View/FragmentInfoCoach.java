@@ -1,5 +1,8 @@
 package com.example.ballz.View;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -12,11 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +67,8 @@ public class FragmentInfoCoach extends Fragment {
     ImageView imgAvatarCoachInfo, imgClubCoachInfo;
     TextView tvNameCoachInfoClub,tvAgeCoach, tvBirthdayCoach,tvCountryCoachInfo,tvPercentage,
             tvNameClubCoach2, tvNumMatchInfoCoach, tvWinCoach, tvDrawCoach, tvLoseCoach, tvNameClubInfoCoach;
+
+    ProgressBar procWin,procDraw,procLose,progcCirAll;
     String urlInfoClubCoach= null;
     String idCoach = null;
     public FragmentInfoCoach() {
@@ -101,6 +109,7 @@ public class FragmentInfoCoach extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info_coach, container, false);
@@ -118,6 +127,10 @@ public class FragmentInfoCoach extends Fragment {
         tvDrawCoach = view.findViewById(R.id.tvDrawCoach);
         tvLoseCoach = view.findViewById(R.id.tvLoseCoach);
         tvPercentage = view.findViewById(R.id.tvPercentage);
+        procWin = view.findViewById(R.id.procWin);
+        procDraw = view.findViewById(R.id.procDraw);
+        procLose = view.findViewById(R.id.procLose);
+        progcCirAll = view.findViewById(R.id.progcCirAll);
 
         if (getArguments() != null) {
             idCoach = getArguments().getString("idCoach");
@@ -162,8 +175,8 @@ public class FragmentInfoCoach extends Fragment {
                     String formattedDate = dateFormatLocal.format(dateUTC);
                     String imgCoach = "https://images.fotmob.com/image_resources/playerimages/" + idCoach + ".png";
                     Picasso.get().load(imgCoach).resize(75, 75).into(imgAvatarCoachInfo);
-                    tvAgeCoach.setText(age + " Tuổi"  );
-                    tvBirthdayCoach.setText("Ngày sinh: " + formattedDate);
+                    tvAgeCoach.setText(age + " years old"  );
+                    tvBirthdayCoach.setText(formattedDate);
                     tvNameCoachInfoClub.setText(name);
                     tvCountryCoachInfo.setText(country);
                     tvNameClubInfoCoach.setText(teamName);
@@ -180,6 +193,80 @@ public class FragmentInfoCoach extends Fragment {
                     float percentage = (Float.parseFloat(wins) / Float.parseFloat(matches))  * 100;
                     String formattedPercentage = String.format("%.2f", percentage);
                     tvPercentage.setText(formattedPercentage+"%");
+
+                    //ProgcessWin
+                    if (Float.parseFloat(matches) != 0) {
+                        float percentWin = (Float.parseFloat(wins) / Float.parseFloat(matches)) * 100;
+                        float percentDraw = (Float.parseFloat(draws) / Float.parseFloat(matches)) * 100;
+                        float percentLose = (Float.parseFloat(losses) / Float.parseFloat(matches)) * 100;
+                        if (percentWin > 100) {
+                            percentWin = 100;
+                        }
+                        else if(percentDraw > 100)
+                        {
+
+                        }
+                        else if(percentLose > 100)
+                        {
+
+                        }
+
+                        procWin.setProgress((int) percentWin);
+                    } else {
+                        procWin.setProgress(0);
+                    }
+
+                    //ProgcessDraw
+                    if (Float.parseFloat(matches) != 0) {
+                        float percentDraw = (Float.parseFloat(draws) / Float.parseFloat(matches)) * 100;
+                        if (percentDraw > 100 ) {
+                            percentDraw = 100;
+                        }
+
+                        procDraw.setProgress((int) percentDraw);
+                    } else {
+                        procDraw.setProgress(0);
+                    }
+
+
+
+
+                    //ProgcessLose
+                    if (Float.parseFloat(matches) != 0) {
+                        float percentLose = (Float.parseFloat(losses) / Float.parseFloat(matches)) * 100;
+                        if (percentLose > 100) {
+                            percentLose = 100;
+                        }
+                        procLose.setProgress((int) percentLose);
+                    } else {
+                        procLose.setProgress(0);
+                    }
+
+
+                    //progcAll
+
+
+
+                    if (Float.parseFloat(matches) != 0) {
+                        percentage = Math.min(percentage, 100);
+                        progcCirAll.setIndeterminate(false);
+                        progcCirAll.setMax(100);
+                        progcCirAll.setProgress((int) percentage);
+                    } else {
+                        progcCirAll.setProgress(0);
+                    }
+//                    new Handler().post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            progcCirAll.setIndeterminate(false);
+//                            progcCirAll.setMax(100);
+//                            progcCirAll.setProgress((int) percentage);
+//                        }
+//                    });
+
+
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

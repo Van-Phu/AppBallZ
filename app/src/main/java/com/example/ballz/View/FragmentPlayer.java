@@ -128,7 +128,7 @@ public class FragmentPlayer extends Fragment {
         if (getArguments() != null) {
             idPlayer = getArguments().getString("idPlayer");
         }
-        String urlTournaments = "https://images.fotmob.com/image_resources/logo/leaguelogo/47.png";
+        String urlTournaments = "https://images.fotmob.com/image_resources/logo/leaguelogo/dark/47.png";
         urlInfoClubPlayer = "https://www.fotmob.com/api/newPlayerData?id=" +idPlayer;
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         StringRequest request = new StringRequest(Request.Method.GET, urlInfoClubPlayer, new Response.Listener<String>() {
@@ -217,8 +217,8 @@ public class FragmentPlayer extends Fragment {
 
                     String imgCoach = "https://images.fotmob.com/image_resources/playerimages/" + idPlayer + ".png";
                     Picasso.get().load(imgCoach).resize(90, 90).into(imgAvatarPlayer);
-                    tvAgePlayerInfo.setText(age + " Tuổi" );
-                    tvBirthdayPlayer.setText("Ngày sinh: " + formattedDate);
+                    tvAgePlayerInfo.setText(age + " years old" );
+                    tvBirthdayPlayer.setText(formattedDate);
 
                     tvNamePlayerInfo.setText(name);
                     tvCountryInfoPLayer.setText(country);
@@ -234,9 +234,9 @@ public class FragmentPlayer extends Fragment {
                     tvCountryInfoPLayer.setText(country);
                     tvMarketPlayer.setText(market);
                     if ("Left".equals(preferred)){
-                        tvLegPlayer.setText("Chân Trái");
+                        tvLegPlayer.setText("Right Leg");
                     } else if ("Right".equals(preferred)) {
-                        tvLegPlayer.setText("Chân Phải");
+                        tvLegPlayer.setText("Right Leg");
                     }
 
                     tvLeagueName.setText(leagueName);
