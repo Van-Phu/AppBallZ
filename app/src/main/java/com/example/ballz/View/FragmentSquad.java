@@ -56,7 +56,7 @@ public class FragmentSquad extends Fragment {
     ImageView imgLogoSquad;
     TextView tvNameClubSquad;
 
-    LinearLayout lnNotLoad, lnNotLoadAgain;
+    LinearLayout lnNotLoad, lnNotLoadAgain, lnBackgroundCoachNotLoad, lnBackgroundPlayerNotLoad;
 
     RequestQueue requestQueue;
     String urlSquadClub = null;

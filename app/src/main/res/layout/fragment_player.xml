@@ -299,7 +299,7 @@
                                 android:id="@+id/tv8"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="CLOTHERS NUMBER"
+                                android:text="Clothers number"
                                 android:textColor="@color/purple_200" />
                         </LinearLayout>
 
@@ -427,15 +427,17 @@
                             android:id="@+id/tvRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:padding="5dp"
                             android:text="6.50"
                             android:textColor="@color/white"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Review"
+                            android:text="Rating"
                             android:textColor="@color/white"
                             android:textSize="20dp" />
 
@@ -452,12 +454,14 @@
                             android:id="@+id/tvGoalsPlayerInfo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:padding="5dp"
                             android:text="50"
                             android:textColor="@color/white"
                             android:textSize="20dp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvGoalsPlayerInfoTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Goals recognized"
@@ -490,6 +494,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvAssitsPlayerTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Assist"
@@ -515,6 +520,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvMinutesPlayerTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Minutes played"
@@ -549,6 +555,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvMatchPlayedTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="The matches have started"
@@ -574,6 +581,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvMatchPlayerInfoTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Match"
