@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -75,6 +77,7 @@ public class FragmentHistoryFighting extends Fragment {
     ImageView imgHome, imgAway, imgHomeHTH, imgAwayHTH, imgLogoHomeIN, imgLogoAwayIN, imgAwayHistory, imgHomeHistory;
     ListView lvMatchup, lvAwayHistory, lvHomeHistory;
     RequestQueue requestQueue;
+    ProgressBar progress;
     String feedID = "";
 
     List<Matchup> matchupList = new ArrayList<>();
@@ -147,6 +150,7 @@ public class FragmentHistoryFighting extends Fragment {
         lvAwayHistory = view.findViewById(R.id.lvAwayHistory);
         imgHomeHistory = view.findViewById(R.id.imgHomeHistory);
         imgAwayHistory = view.findViewById(R.id.imgAwayHistory);
+        progress = view.findViewById(R.id.progressBar);
 
 
 
@@ -254,6 +258,13 @@ public class FragmentHistoryFighting extends Fragment {
                     tvWonAway.setText(awayWon);
                     tvDrawn.setText(drawn);
 
+                    int numA = Integer.parseInt(homeWon);
+                    int numB = Integer.parseInt(awayWon);
+
+                    double percentScore = ((double) numA / (numA + numB)) * 100;
+                    System.out.println("a: " + percentScore);
+                    progress.setProgress((int)percentScore);
+
                     JSONArray arrayMatchup = jsonResponse.getJSONArray("headToHeadMatches");
 
                     for(int i = 0; i < arrayMatchup.length(); i++){
@@ -276,6 +287,8 @@ public class FragmentHistoryFighting extends Fragment {
                         String outputDateStr = localDateTime.format(outputFormatter);
                         Matchup matchup = new Matchup(outputDateStr, logoHome,logoAway, nameTour ,totalScore );
                         matchupList.add(matchup);
+
+
                     }
 
                 } catch (JSONException e) {
