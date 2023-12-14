@@ -339,18 +339,18 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="280dp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp">
 
                     <ProgressBar
                         android:id="@+id/progcCirAll"
+                        android:padding="100dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:indeterminateOnly="false"
 
-
-                        android:layout_centerInParent="true"
                         android:progressDrawable="@drawable/progcess_all_cir" />
 
                     <TextView

@@ -33,6 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -58,6 +59,7 @@ public class FragmentStandings extends Fragment {
     CustomAdaperTableStandings adapterTableStandings;
     RequestQueue requestQueue;
     TextView tvSeeAllStandingTable, tvAllTopScoresPlayer;
+
 
     String urlClubStanding = "https://supersport.com/apix/football/v5/tours/c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6/table-logs";
 
@@ -160,6 +162,8 @@ public class FragmentStandings extends Fragment {
                 loadFragment(new FragmentTableStandingFull());
             }
         });
+
+
         tvAllTopScoresPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,6 +196,7 @@ public class FragmentStandings extends Fragment {
                             lvTopScorers.setAdapter(adapterTopScores);
                         } else {
                             adapterTopScores.notifyDataSetChanged();
+
                         }
                     } else {
                         Log.e("StandingsFragment", "Activity is null");
@@ -199,12 +204,13 @@ public class FragmentStandings extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(), "Error fetching data", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "l", Toast.LENGTH_LONG).show();
             }
         });
 
