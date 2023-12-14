@@ -189,18 +189,8 @@ public class FragmentInfoCoach extends Fragment {
                     //ProgcessWin
                     if (Float.parseFloat(matches) != 0) {
                         float percentWin = (Float.parseFloat(wins) / Float.parseFloat(matches)) * 100;
-                        float percentDraw = (Float.parseFloat(draws) / Float.parseFloat(matches)) * 100;
-                        float percentLose = (Float.parseFloat(losses) / Float.parseFloat(matches)) * 100;
                         if (percentWin > 100) {
                             percentWin = 100;
-                        }
-                        else if(percentDraw > 100)
-                        {
-
-                        }
-                        else if(percentLose > 100)
-                        {
-
                         }
 
                         procWin.setProgress((int) percentWin);
@@ -208,13 +198,15 @@ public class FragmentInfoCoach extends Fragment {
                         procWin.setProgress(0);
                     }
 
+
+
+
                     //ProgcessDraw
                     if (Float.parseFloat(matches) != 0) {
                         float percentDraw = (Float.parseFloat(draws) / Float.parseFloat(matches)) * 100;
                         if (percentDraw > 100 ) {
                             percentDraw = 100;
                         }
-
                         procDraw.setProgress((int) percentDraw);
                     } else {
                         procDraw.setProgress(0);
@@ -234,8 +226,8 @@ public class FragmentInfoCoach extends Fragment {
 
 
                     //progcAll
+
                     if (Float.parseFloat(matches) != 0) {
-                        percentage = Math.min(percentage, 100);
                         progcCirAll.setIndeterminate(false);
                         progcCirAll.setMax(100);
                         progcCirAll.setProgress((int) percentage);
