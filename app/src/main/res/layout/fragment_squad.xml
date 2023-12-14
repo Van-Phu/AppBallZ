@@ -8,6 +8,7 @@
     tools:context=".View.FragmentSquad">
     <!-- TODO: Update blank fragment layout -->
         <LinearLayout
+            android:id="@+id/lnNotLoadFragmentAgain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -23,6 +24,7 @@
                 android:padding="20dp"
                 />
             <LinearLayout
+                android:id="@+id/lnNotLoad"
                 android:background="#222232"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
@@ -36,6 +38,7 @@
                     android:layout_height="70dp"
                     android:src="@drawable/manchester_city"/>
                 <LinearLayout
+                    android:id="@+id/lnNotLoadAgain"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_height="100dp"
@@ -93,7 +96,7 @@
                     android:textStyle="bold" />
 
                 <ListView
-                    android:id="@+id/lvCoach"
+                    android:id="@+id/lvCoachClub"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"

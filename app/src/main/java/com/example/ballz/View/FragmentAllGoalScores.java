@@ -3,11 +3,14 @@ package com.example.ballz.View;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -44,13 +47,17 @@ public class FragmentAllGoalScores extends Fragment {
     private String mParam2;
     ArrayList<AllGoalScores> arrayListAllGoalScores = new ArrayList<>();
     ListView lvTableAllGoalScores;
+
+    ImageView imgBTableStanding;
     CustomAdapterAllGoalScores adapterAllGoalScores;
     RequestQueue requestQueue;
+
     String urlGoalScores = "https://www.fotmob.com/api/leagueseasondeepstats?id=47&season=20720&type=players&stat=goals&slug=premier-league-players";
 
     public FragmentAllGoalScores() {
         // Required empty public constructor
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -85,6 +92,7 @@ public class FragmentAllGoalScores extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_goal_scores, container, false);
         lvTableAllGoalScores = (ListView) view.findViewById(R.id.lvTableAllGoalScores);
+        imgBTableStanding = view.findViewById(R.id.imgBTableStanding);
         requestQueue = Volley.newRequestQueue(requireContext());
         StringRequest request = new StringRequest(Request.Method.GET, urlGoalScores, new Response.Listener<String>() {
             @Override
@@ -124,10 +132,19 @@ public class FragmentAllGoalScores extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), "Error fetching data", Toast.LENGTH_LONG).show();
             }
         });
-
         requestQueue.add(request);
+        imgBTableStanding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new FragmentStandings());
+            }
+        });
         return view;
-
-
+    }
+    public void loadFragment(Fragment fragment){
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentAllGoal, fragment);
+        fragmentTransaction.commit();
     }
 }

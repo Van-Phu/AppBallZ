@@ -125,15 +125,17 @@
                             android:textColor="@color/white"
                             android:textSize="23dp"
                             android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvBirthdayCoach"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="5dp"
                             android:text="08/08/2028"
-                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/white"
                             android:textSize="15dp"
-                            android:textColor="@color/white" />
+                            tools:ignore="TextSizeCheck" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -354,11 +356,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
                         android:text="Win rate"
                         android:textColor="@color/white"
                         android:textSize="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:gravity="center"/>
+                        tools:ignore="TextSizeCheck" />
 
                     <TextView
                         android:id="@+id/tvPercentage"
@@ -369,9 +372,7 @@
                         android:text="133"
                         android:textColor="@color/white"
                         android:textSize="25dp" />
-
                 </RelativeLayout>
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

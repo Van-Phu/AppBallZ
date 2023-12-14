@@ -129,7 +129,7 @@ public class FragmentPlayer extends Fragment {
             idPlayer = getArguments().getString("idPlayer");
         }
         String urlTournaments = "https://images.fotmob.com/image_resources/logo/leaguelogo/dark/47.png";
-        urlInfoClubPlayer = "https://www.fotmob.com/api/newPlayerData?id=" +idPlayer;
+        urlInfoClubPlayer = "https://www.fotmob.com/api/playerData?id=" +idPlayer;
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         StringRequest request = new StringRequest(Request.Method.GET, urlInfoClubPlayer, new Response.Listener<String>() {
             @Override
