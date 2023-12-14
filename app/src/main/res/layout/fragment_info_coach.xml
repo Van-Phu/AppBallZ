@@ -63,7 +63,7 @@
                         android:layout_weight="2"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:paddingLeft="10dp">
+                        android:paddingLeft="20dp">
                         <TextView
                             android:id="@+id/tvNameCoachInfoClub"
                             android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                             android:text="100 tuổi"
                             android:layout_marginLeft="10dp"
                             android:textColor="@color/white"
-                            android:textSize="18dp"
+                            android:textSize="23dp"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/tvBirthdayCoach"
@@ -132,7 +132,7 @@
                             android:layout_marginTop="5dp"
                             android:text="08/08/2028"
                             android:layout_marginLeft="10dp"
-                            android:textSize="13dp"
+                            android:textSize="15dp"
                             android:textColor="@color/white" />
                     </LinearLayout>
 
@@ -142,30 +142,24 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-
+                        <TextView
+                            android:id="@+id/tvCountryCoachInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mỹ tho"
+                            android:textColor="@color/white"
+                            android:textSize="23dp"
+                            android:textStyle="bold"
+                            tools:ignore="TextSizeCheck" />
                         <TextView
                             android:id="@+id/textView29"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Quốc gia"
+                            android:text="Nation"
+                            android:textSize="20dp"
                             android:textColor="@color/purple_200" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:id="@+id/tvCountryCoachInfo"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Mỹ tho"
-                                android:textColor="@color/white"
-                                android:textSize="15dp"
-                                android:textStyle="bold"
-                                tools:ignore="TextSizeCheck" />
-                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
@@ -179,30 +173,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="10dp"
+                    android:padding="15dp"
                     android:text="Manchester City"
+                    android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
-                    android:textSize="15dp"
+                    android:textSize="25dp"
                     android:textStyle="bold"
                     tools:ignore="TextSizeCheck" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:orientation="horizontal"
                     android:layout_marginTop="0.5dp"
                     android:background="#222232"
-                    android:weightSum="3"
-                    >
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="2"
                         android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:background="@drawable/border_right"
                         android:gravity="center"
-                        android:background="@drawable/border_right">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvNumMatchInfoCoach"
@@ -210,36 +204,35 @@
                             android:layout_height="wrap_content"
                             android:text="100"
                             android:textColor="@color/white"
-                            android:textSize="20dp"
-                            />
+                            android:textSize="20dp" />
 
                         <TextView
                             android:id="@+id/textView30"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Trận đấu"
-                            android:textColor="@color/purple_200"/>
+                            android:text="Match"
+                            android:textColor="@color/purple_200" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
                         android:layout_weight="1"
+                        android:orientation="horizontal"
                         android:weightSum="3">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:orientation="vertical"
                             android:layout_gravity="center"
+                            android:orientation="vertical"
                             android:paddingLeft="30dp">
 
                             <TextView
                                 android:id="@+id/textView34"
                                 android:layout_width="60dp"
                                 android:layout_height="wrap_content"
-                                android:text="Thắng"
+                                android:text="Win"
                                 android:textColor="@color/white"
                                 android:textSize="15dp"
                                 android:textStyle="bold"
@@ -249,9 +242,9 @@
                                 android:id="@+id/textView35"
                                 android:layout_width="60dp"
                                 android:layout_height="wrap_content"
-                                android:text="Hòa"
-                                android:textColor="@color/white"
                                 android:layout_marginTop="3dp"
+                                android:text="Draw"
+                                android:textColor="@color/white"
                                 android:textSize="15dp"
                                 android:textStyle="bold"
                                 tools:ignore="TextSizeCheck" />
@@ -260,9 +253,9 @@
                                 android:id="@+id/textView33"
                                 android:layout_width="60dp"
                                 android:layout_height="wrap_content"
-                                android:text="Bại"
-                                android:textColor="@color/white"
                                 android:layout_marginTop="3dp"
+                                android:text="Lose"
+                                android:textColor="@color/white"
                                 android:textSize="15dp"
                                 android:textStyle="bold"
                                 tools:ignore="TextSizeCheck" />
@@ -271,17 +264,17 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:paddingRight="15dp"
-                            android:orientation="vertical"
                             android:layout_gravity="center"
-                            android:background="@drawable/border_right"
-                            >
+
+                            android:orientation="vertical"
+                            android:paddingRight="15dp">
 
                             <TextView
                                 android:id="@+id/tvWinCoach"
                                 android:layout_width="40dp"
                                 android:layout_height="wrap_content"
                                 android:text="200"
+
                                 android:textColor="@color/white"
                                 android:textSize="15dp"
                                 tools:ignore="TextSizeCheck" />
@@ -290,8 +283,8 @@
                                 android:id="@+id/tvDrawCoach"
                                 android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:text="200"
                                 android:layout_marginTop="3dp"
+                                android:text="200"
                                 android:textColor="@color/white"
                                 android:textSize="15dp"
                                 tools:ignore="TextSizeCheck" />
@@ -300,35 +293,85 @@
                                 android:id="@+id/tvLoseCoach"
                                 android:layout_width="40dp"
                                 android:layout_height="wrap_content"
-                                android:text="12"
                                 android:layout_marginTop="3dp"
+                                android:text="12"
                                 android:textColor="@color/white"
                                 android:textSize="15dp"
                                 tools:ignore="TextSizeCheck" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Tỷ lệ thắng"
-                                android:textColor="@color/white"
-                                android:textSize="15dp"/>
-                            <TextView
-                                android:id="@+id/tvPercentage"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="133"
-                                android:textColor="@color/white"
-                                android:textSize="25dp"/>
+                            android:orientation="vertical"
+                            android:weightSum="3">
 
+                            <ProgressBar
+                                android:id="@+id/procWin"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingRight="20dp"
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/procDraw"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingRight="20dp"/>
+
+                            <ProgressBar
+                                android:id="@+id/procLose"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingRight="20dp"/>
                         </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <ProgressBar
+                        android:id="@+id/progcCirAll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+
+                        android:layout_centerInParent="true"
+                        android:progressDrawable="@drawable/progcess_all_cir" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Win rate"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/tvPercentage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="133"
+                        android:textColor="@color/white"
+                        android:textSize="25dp" />
+
+                </RelativeLayout>
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

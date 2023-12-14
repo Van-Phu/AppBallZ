@@ -132,7 +132,8 @@ public class FragmentStandings extends Fragment {
                     }
                     if (getActivity() != null) {
                         if (adapterTableStandings == null) {
-                            adapterTableStandings = new CustomAdaperTableStandings(getActivity(), R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
+                            adapterTableStandings = new CustomAdaperTableStandings(getActivity(),
+                                    R.layout.item_club_table_standings, (ArrayList<ClubStanding>) clubStandingArrayList);
                             lvTableStangdings.setAdapter(adapterTableStandings);
                         } else {
                             adapterTableStandings.notifyDataSetChanged();
@@ -209,6 +210,20 @@ public class FragmentStandings extends Fragment {
         });
 
         requestQueue.add(request1);
+        lvTableStangdings.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ClubStanding clubStanding = clubStandingArrayList.get(position);
+                FragmentSquad fragmentSquad = FragmentSquad.newInstance(clubStanding.getNameClub());
+                if (getActivity() != null) {
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragStangding, fragmentSquad)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            }
+        });
         return view;
     }
     public void loadFragment(Fragment fragment){
