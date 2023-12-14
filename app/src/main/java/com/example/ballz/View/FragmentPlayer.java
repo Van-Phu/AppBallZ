@@ -54,7 +54,8 @@ public class FragmentPlayer extends Fragment {
     ImageView imgClubInfoPlayer, imgAvatarPlayer, imgTournamentsPLayer;
     TextView tvNamePlayerInfo,tvNameClubInfoPlayer, tvNameClubInfoPlayer2,tvPositionPlayer, tvAgePlayerInfo,
             tvHeightPlayer,tvBirthdayPlayer,tvCountryInfoPLayer,tvNumShirtPlayer,tvMarketPlayer, tvLegPlayer, tvLeagueName,
-            tvRating, tvGoalsPlayerInfo, tvAssitsPlayer, tvMinutesPlayer, tvMatchPlayed, tvMatchPlayerInfo, tvCardYellowPlayer, tvCardRed;
+            tvRating, tvGoalsPlayerInfo, tvAssitsPlayer, tvMinutesPlayer, tvMatchPlayed, tvMatchPlayerInfo, tvCardYellowPlayer, tvCardRed,
+            tvMatchPlayerInfoTitle,tvMatchPlayedTitle,tvMinutesPlayerTitle,tvAssitsPlayerTitle, tvGoalsPlayerInfoTitle;
     String idPlayer = null;
     String urlInfoClubPlayer= null;
     public FragmentPlayer() {
@@ -124,6 +125,11 @@ public class FragmentPlayer extends Fragment {
         tvMatchPlayerInfo = view.findViewById(R.id.tvMatchPlayerInfo);
         tvCardYellowPlayer = view.findViewById(R.id.tvCardYellowPlayer);
         tvCardRed = view.findViewById(R.id.tvCardRed);
+        tvMatchPlayerInfoTitle = view.findViewById(R.id.tvMatchPlayerInfoTitle);
+        tvMatchPlayedTitle  = view.findViewById(R.id.tvMatchPlayedTitle);
+        tvMinutesPlayerTitle = view.findViewById(R.id.tvMinutesPlayerTitle);
+        tvAssitsPlayerTitle = view.findViewById(R.id.tvAssitsPlayerTitle);
+        tvGoalsPlayerInfoTitle = view.findViewById(R.id.tvGoalsPlayerInfoTitle);
         imgTournamentsPLayer = view.findViewById(R.id.imgTournamentsPLayer);
         if (getArguments() != null) {
             idPlayer = getArguments().getString("idPlayer");
@@ -184,30 +190,60 @@ public class FragmentPlayer extends Fragment {
                     String yellowCards = "";
                     String redCards = "";
 
-                    for (int i = 0; i < playerProps.length(); i++) {
-                        JSONObject prop = playerProps.getJSONObject(i);
-                        String title = prop.optString("title");
-                        String value = prop.optString("value");
+                    //keeper
+                    String goalsConceded = "";
+                    String cleanSheets = "";
+                    String savedPenalties = "";
 
-                        if ("FotMob rating".equals(title)) {
-                            fotMobRating = value;
-                        } else if ("Goals".equals(title)) {
-                            goals = value;
-                        } else if ("Assists".equals(title)) {
-                            assists = value;
-                        } else if ("Minutes".equals(title)) {
-                            minutesPlayed = value;
-                        } else if ("Matches started".equals(title)) {
-                            matchesStarted = value;
-                        } else if ("Matches".equals(title)) {
-                            matches = value;
-                        } else if ("Yellow cards".equals(title)) {
-                            yellowCards = value;
-                        } else if ("Red cards".equals(title)) {
-                            redCards = value;
+                    if(position.equals("Keeper")){
+                        System.out.println(position);
+                        for (int i = 0; i < playerProps.length(); i++) {
+                            JSONObject prop = playerProps.getJSONObject(i);
+                            String title = prop.optString("title");
+                            String value = prop.optString("value");
+                            if ("FotMob rating".equals(title)) {
+                                fotMobRating = value;
+                            }else if ("Goals conceded".equals(title)) {
+                                goalsConceded = value;
+                            }
+                            else if ("Clean sheets".equals(title)) {
+                                cleanSheets = value;
+                            } else if ("Saved penalties".equals(title)) {
+                                savedPenalties = value;
+                            } else if ("Minutes".equals(title)) {
+                                minutesPlayed = value;
+                            } else if ("Matches".equals(title)) {
+                                matches = value;
+                            } else if ("Yellow cards".equals(title)) {
+                                yellowCards = value;
+                            } else if ("Red cards".equals(title)) {
+                                redCards = value;
+                            }
+                        }
+                    }else {
+                        for (int i = 0; i < playerProps.length(); i++) {
+                            JSONObject prop = playerProps.getJSONObject(i);
+                            String title = prop.optString("title");
+                            String value = prop.optString("value");
+                            if ("FotMob rating".equals(title)) {
+                                fotMobRating = value;
+                            } else if ("Goals".equals(title)) {
+                                goals = value;
+                            } else if ("Assists".equals(title)) {
+                                assists = value;
+                            } else if ("Minutes".equals(title)) {
+                                minutesPlayed = value;
+                            } else if ("Matches started".equals(title)) {
+                                matchesStarted = value;
+                            } else if ("Matches".equals(title)) {
+                                matches = value;
+                            } else if ("Yellow cards".equals(title)) {
+                                yellowCards = value;
+                            } else if ("Red cards".equals(title)) {
+                                redCards = value;
+                            }
                         }
                     }
-
 
                     SimpleDateFormat dateFormatUTC = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
                     dateFormatUTC.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -238,27 +274,48 @@ public class FragmentPlayer extends Fragment {
                     } else if ("Right".equals(preferred)) {
                         tvLegPlayer.setText("Right Leg");
                     }
-
                     tvLeagueName.setText(leagueName);
                     tvRating.setText(fotMobRating);
-                    System.out.println("12323: " +goals);
-                    if (goals.isEmpty()) {
-                        tvGoalsPlayerInfo.setText("0");
-                    } else {
+                    if (position.equals("Keeper")){
+                        tvMinutesPlayer.setText(minutesPlayed);
+                        tvGoalsPlayerInfo.setText(goalsConceded);
+                        if (goalsConceded.isEmpty()) {
+                            tvGoalsPlayerInfo.setText("0");
+                        } else {
+                            tvGoalsPlayerInfo.setText(goalsConceded);
+                        }
+                        tvAssitsPlayer.setText(cleanSheets);
+                        tvMinutesPlayer.setText(savedPenalties);
+                        tvMatchPlayed.setText(minutesPlayed);
+                        tvMatchPlayerInfo.setText(matches);
+                        tvCardYellowPlayer.setText(yellowCards);
+                        tvCardRed.setText(redCards);
+                        tvGoalsPlayerInfoTitle.setText("Goals conceded");
+                        tvMatchPlayedTitle.setText("Clean sheets");
+                        tvMinutesPlayerTitle.setText("Saved penalties");
+                        tvAssitsPlayerTitle.setText("Minutes");
+                        tvMatchPlayerInfoTitle.setText(" Matches");
+                    }else {
                         tvGoalsPlayerInfo.setText(goals);
-                    }
-                    if (assists.isEmpty()) {
-                        tvAssitsPlayer.setText("0");
-                    } else {
                         tvAssitsPlayer.setText(assists);
+                        tvMinutesPlayer.setText(minutesPlayed);
+                        tvMatchPlayed.setText(matchesStarted);
+                        tvMatchPlayerInfo.setText(matches);
+                        tvCardYellowPlayer.setText(yellowCards);
+                        tvCardRed.setText(redCards);
+                    }
+
+                    float rating = Float.parseFloat(fotMobRating);
+                    System.out.println(rating);
+                    if (rating <= 5.0) {
+                        tvRating.setBackgroundResource(R.drawable.radius_back_red);
+                    } else if (rating >= 5.0 && rating <= 7.0){
+                        tvRating.setBackgroundResource(R.drawable.radius_back_ograge);
+                    } else if (rating >= 7.0){
+                        tvRating.setBackgroundResource(R.drawable.radius_back_green);
                     }
 
 
-                    tvMinutesPlayer.setText(minutesPlayed);
-                    tvMatchPlayed.setText(matchesStarted);
-                    tvMatchPlayerInfo.setText(matches);
-                    tvCardYellowPlayer.setText(yellowCards);
-                    tvCardRed.setText(redCards);
                     Picasso.get().load(urlTournaments).resize(45, 45).into(imgTournamentsPLayer);
 
                 } catch (JSONException e) {

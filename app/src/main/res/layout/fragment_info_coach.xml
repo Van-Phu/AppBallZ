@@ -8,6 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
+        android:id="@+id/lnInfoCoachNotLoad"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -350,7 +351,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:indeterminateOnly="false"
-
+                        android:layout_centerInParent="true"
                         android:progressDrawable="@drawable/progcess_all_cir" />
 
                     <TextView
