@@ -58,7 +58,6 @@ public class FragmentStandings extends Fragment {
     CustomAdaperTableStandings adapterTableStandings;
     RequestQueue requestQueue;
     TextView tvSeeAllStandingTable, tvAllTopScoresPlayer;
-    FrameLayout fragMain;
 
     String urlClubStanding = "https://supersport.com/apix/football/v5/tours/c0ca5665-d9d9-42dc-ad86-a7f48a4da2c6/table-logs";
 

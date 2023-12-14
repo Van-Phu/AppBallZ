@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,10 +52,11 @@ public class FragmentSquad extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
     ListView lvCoach, lvPlayer;
     ImageView imgLogoSquad;
     TextView tvNameClubSquad;
+
+    LinearLayout lnNotLoad, lnNotLoadAgain;
 
     RequestQueue requestQueue;
     String urlSquadClub = null;
@@ -105,10 +107,12 @@ public class FragmentSquad extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_squad, container, false);
-        lvCoach = (ListView) view.findViewById(R.id.lvCoach);
+        lvCoach = (ListView) view.findViewById(R.id.lvCoachClub);
         lvPlayer = (ListView) view.findViewById(R.id.lvPlayer);
         imgLogoSquad = (ImageView) view.findViewById(R.id.imgLogoSquad);
         tvNameClubSquad = (TextView) view.findViewById(R.id.tvNameClubSquad);
+        lnNotLoad = view.findViewById(R.id.lnNotLoad);
+        lnNotLoadAgain = view.findViewById(R.id.lnNotLoadAgain);
         String nameClub = "";
         if (getArguments() != null) {
             nameClub = getArguments().getString("nameClub");
@@ -207,6 +211,18 @@ public class FragmentSquad extends Fragment {
                             .addToBackStack(null)
                             .commit();
                 }
+            }
+        });
+        lnNotLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        lnNotLoadAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         return view;

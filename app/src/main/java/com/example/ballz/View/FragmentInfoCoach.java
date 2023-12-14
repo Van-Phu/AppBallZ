@@ -1,7 +1,5 @@
 package com.example.ballz.View;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,13 +8,8 @@ import android.icu.text.SimpleDateFormat;
 import android.icu.util.TimeZone;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentResultListener;
 
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.ballz.Controller.CustomAdapterCoach;
-import com.example.ballz.Controller.CustomAdapterPlayer;
-import com.example.ballz.Model.Coach;
-import com.example.ballz.Model.Player;
 import com.example.ballz.R;
 import com.squareup.picasso.Picasso;
 
@@ -132,10 +121,13 @@ public class FragmentInfoCoach extends Fragment {
         procLose = view.findViewById(R.id.procLose);
         progcCirAll = view.findViewById(R.id.progcCirAll);
 
+
+
+
         if (getArguments() != null) {
             idCoach = getArguments().getString("idCoach");
         }
-        urlInfoClubCoach = "https://www.fotmob.com/api/newPlayerData?id=" +idCoach;
+        urlInfoClubCoach = "https://www.fotmob.com/api/playerData?id=" +idCoach;
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         StringRequest request = new StringRequest(Request.Method.GET, urlInfoClubCoach, new Response.Listener<String>() {
             @Override
@@ -229,8 +221,6 @@ public class FragmentInfoCoach extends Fragment {
                     }
 
 
-
-
                     //ProgcessLose
                     if (Float.parseFloat(matches) != 0) {
                         float percentLose = (Float.parseFloat(losses) / Float.parseFloat(matches)) * 100;
@@ -244,28 +234,16 @@ public class FragmentInfoCoach extends Fragment {
 
 
                     //progcAll
-
-
-
                     if (Float.parseFloat(matches) != 0) {
                         percentage = Math.min(percentage, 100);
                         progcCirAll.setIndeterminate(false);
                         progcCirAll.setMax(100);
                         progcCirAll.setProgress((int) percentage);
-                    } else {
-                        progcCirAll.setProgress(0);
+                        System.out.println(percentage);
                     }
-//                    new Handler().post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            progcCirAll.setIndeterminate(false);
-//                            progcCirAll.setMax(100);
-//                            progcCirAll.setProgress((int) percentage);
-//                        }
-//                    });
-
-
-
+                    else {
+                        procLose.setProgress(0);
+                    }
 
 
                 } catch (JSONException e) {
