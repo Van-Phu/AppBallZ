@@ -29,7 +29,6 @@ android {
 }
 
 dependencies {
-
     //    jackson: parse the json and take data
     implementation 'com.squareup.retrofit2:converter-jackson:2.7.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.3'

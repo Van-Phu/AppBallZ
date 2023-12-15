@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#181928"
     tools:context=".View.FragmentFinalSocer">
 
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
     <LinearLayout
-        android:background="#181928"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#181928"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
@@ -33,7 +41,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="1081dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -98,18 +106,19 @@
                     android:id="@+id/imageView2"
                     android:layout_width="107dp"
                     android:layout_height="133dp"
-                    android:paddingRight="30dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:paddingRight="30dp" />
 
             </LinearLayout>
 
 
             <LinearLayout
                 android:id="@+id/teamContainer"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_width="498dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background_new_match"
                 android:orientation="horizontal"
-
                 android:paddingLeft="20dp">
 
 
@@ -118,44 +127,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="20dp"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tvPlayerScoredAway"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:layout_marginRight="20dp"
-                    android:textSize="20dp"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
             </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="match_parent"
-                android:layout_height="83dp"
-
-                android:gravity="center"
-                android:text="Statistic Match"
-                android:textColor="@color/white"
-                android:textSize="30dp"
-                />
-
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="484dp"
+                android:layout_width="483dp"
+                android:layout_height="646dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="200dp"
+                android:background="@drawable/background_new_match"
+                android:orientation="vertical"
 
-                android:orientation="vertical">
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="83dp"
+
+                    android:gravity="center"
+                    android:text="Statistic Match"
+                    android:textColor="@color/white"
+                    android:textSize="30dp" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -168,15 +178,54 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
-                        android:id="@+id/textView18"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Shots"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Shots"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            tools:ignore="Suspicious0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHome"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAway"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAwayShots"
@@ -188,6 +237,7 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -204,15 +254,52 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
-                        android:id="@+id/textView19"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="shotsOnTarget"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="shotsOnTarget"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHomeShots"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAwayShots"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAsot"
@@ -240,15 +327,52 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
-                        android:id="@+id/textView21"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Corner"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Corner"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHomeCorners"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAwayCorners"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAcorner"
@@ -276,15 +400,52 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
-                        android:id="@+id/textView22"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Offsides"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView22"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Offsides"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHomeOffsides"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAwayOffsides"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAoffsides"
@@ -312,15 +473,51 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
-                        android:id="@+id/textView23"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="BlockedPasses"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewa"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="BlockedPasses"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHomeBlockedPasses"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAwayBlockedPasses"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAblp"
@@ -348,14 +545,51 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="YellowCards"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewb"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="YellowCards"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHomeYellowCards"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAwayYellowCards"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAylc"
@@ -383,14 +617,51 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="RedCards"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="RedCards"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHomeRedCards"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAwayRedCards"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvArc"
@@ -418,14 +689,51 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="totalPasses"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewD"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="TotalPasses"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHomeTotalPasses"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="1000"
+                                android:progress="1000"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAwayTotalPasses"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="1000"
+                                android:progress="1000"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAtp"
@@ -453,14 +761,51 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Crosses"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Crosses"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHomeCrosses"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAwayCrosses"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAcs"
@@ -488,15 +833,51 @@
                         android:textColor="@color/white"
                         android:textSize="20dp" />
 
-                    <TextView
-                        android:id="@+id/textView20"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="BLockShots"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViews"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="BlockedShots"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:orientation="horizontal">
+
+
+                            <ProgressBar
+                                android:id="@+id/progressBarHomeBlockedShots"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+
+                                />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarAwayBlockedShots"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:max="100"
+                                android:progress="100"
+                                android:progressTint="@color/red"
+                                android:rotation="180" />
+
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAbls"
@@ -512,6 +893,106 @@
 
         </LinearLayout>
 
+        <LinearLayout
+
+            android:layout_width="483dp"
+
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_new_match"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Defence"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="353dp">
+
+                <ImageView
+                    android:id="@+id/LogoHomeDF"
+                    android:layout_width="140dp"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="40dp"
+                    android:src="@drawable/arsenal" />
+
+                <ImageView
+                    android:id="@+id/LogoAwayDF"
+                    android:layout_width="140dp"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="320dp"
+                    android:layout_marginTop="40dp"
+                    android:src="@drawable/astonvilla" />
+
+                <ProgressBar
+                    android:id="@+id/Prog2"
+                    android:layout_width="189dp"
+                    android:layout_height="237dp"
+                    android:layout_marginTop="170dp"
+                    android:layout_marginRight="90dp"
+                    android:indeterminateOnly="false"
+                    android:progress="75"
+                    android:progressDrawable="@drawable/circular_progress" />
+
+                <ProgressBar
+                    android:id="@+id/Prog"
+                    android:layout_width="189dp"
+                    android:layout_height="237dp"
+
+                    android:layout_marginLeft="300dp"
+                    android:layout_marginTop="170dp"
+                    android:indeterminateOnly="false"
+                    android:progress="100"
+                    android:progressDrawable="@drawable/circular_progress" />
+
+                <TextView
+                    android:id="@+id/tvHomeBp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="230dp"
+                    android:text="20%"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:id="@+id/tvAwayBp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="360dp"
+                    android:layout_marginTop="230dp"
+                    android:text="20%"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:id="@+id/tvVS"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="40dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginLeft="220dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VS" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
     </LinearLayout>
+</ScrollView>
+
 
 </FrameLayout>
